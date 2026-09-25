@@ -1,0 +1,57 @@
+{
+  "uniprot_rows": 7149,
+  "single_full_ec": 3134,
+  "standard_residues": 3123,
+  "not_in_care": 3034,
+  "unique_sequence": 2984,
+  "uniprot_release": "2026_03 02-September-2026",
+  "care_accessions_excluded": 1349,
+  "care_sequences_excluded": 1349,
+  "ec1_pool_by_class": {
+    "1": 845,
+    "2": 956,
+    "3": 593,
+    "4": 352,
+    "5": 136,
+    "6": 66,
+    "7": 36
+  },
+  "ec1_clusters_by_class": {
+    "1": 369,
+    "2": 549,
+    "3": 362,
+    "4": 156,
+    "5": 88,
+    "6": 39,
+    "7": 18
+  },
+  "ec4_ecs": {
+    "1.14.99.56": 12,
+    "2.3.1.225": 11,
+    "2.3.2.27": 37,
+    "2.7.11.1": 34,
+    "2.7.13.3": 21,
+    "2.7.7.6": 15,
+    "2.7.7.65": 10,
+    "3.1.1.1": 10,
+    "3.1.3.16": 12,
+    "3.2.1.14": 11,
+    "3.4.19.12": 13
+  },
+  "enzyme_release": "Release of 02-Sep-2026",
+  "ec4_names": {
+    "1.14.99.56": "lytic cellulose monooxygenase (C4-dehydrogenating)",
+    "2.3.1.225": "protein S-acyltransferase",
+    "2.3.2.27": "RING-type E3 ubiquitin transferase",
+    "2.7.11.1": "non-specific serine/threonine protein kinase",
+    "2.7.13.3": "histidine kinase",
+    "2.7.7.6": "DNA-directed RNA polymerase",
+    "2.7.7.65": "diguanylate cyclase",
+    "3.1.1.1": "carboxylesterase",
+    "3.1.3.16": "protein-serine/threonine phosphatase",
+    "3.2.1.14": "chitinase",
+    "3.4.19.12": "ubiquitinyl hydrolase 1"
+  },
+  "n_ec1": 210,
+  "n_ec4": 110
+}

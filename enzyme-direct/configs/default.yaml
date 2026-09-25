@@ -1,0 +1,52 @@
+seed: 7
+# CARE is used only as an exclusion list: no protein from any CARE Task 1 test split may appear
+# in these benchmarks (by accession or by exact sequence). CARE's training split is not excluded:
+# neither model was trained on it, and excluding it leaves too few EC 5/6 families (CARE already
+# holds almost every Swiss-Prot enzyme created before 2024).
+care:
+  raw_base: https://raw.githubusercontent.com/jsunn-y/CARE
+  commit: e570c36300bce1dd345bb726612784e518aae6b9
+  files:
+  - splits/task1/30_protein_test.csv
+  - splits/task1/30-50_protein_test.csv
+  - splits/task1/price_protein_test.csv
+  - splits/task1/promiscuous_protein_test.csv
+# Accepted EC names for the ec4 answer options (frozen into benchmarks/ec4_labels.tsv).
+enzyme_db: https://ftp.expasy.org/databases/enzyme/enzyme.dat
+uniprot:
+  # Recent Swiss-Prot entries only, to lower the chance that a model saw the sequence together
+  # with its annotation during pre-training.
+  created_after: '2018-01-01'
+  min_len: 80
+  max_len: 600          # at most ~560 Laya tokens, so max_len 1024 below never truncates
+mmseqs:
+  release: 17-b804f
+  # One protein per sequence cluster, so no two benchmark proteins are close homologs.
+  cluster_min_seq_id: 0.3
+  cluster_coverage: 0.8
+stages:
+  ec1:
+    per_class: 35      # EC 6 has 39 distinct 30%-identity families
+    classes: ['1', '2', '3', '4', '5', '6']
+  ec4:
+    n_ecs: 15               # at most; every EC with >= per_ec distinct families is used
+    per_ec: 10              # 11 ECs qualify with the settings above
+    cluster_min_seq_id: 0.5 # proteins of one EC share a family more often; 50% instead of 30%
+# Pre-registered gate for running the harder ec4 benchmark with a model: on ec1 its accuracy's
+# 95% Wilson lower bound must exceed chance + 10 points and the one-sided exact binomial test
+# against chance must give p < 0.001.
+gate:
+  margin_over_chance: 0.10
+  alpha: 0.001
+models:
+  jev:
+    endpoint: https://api.typesafe.ai/v1/systemone
+    model: jev-1.13.0
+  # Laya's default 512-token window cuts the end off sequences over ~500 residues; 1024 fits them
+  # all. The English checkpoint was trained at 512, so it runs beyond its training length here.
+  laya-english:
+    router_model: english
+    max_len: 1024
+  laya-multilingual:
+    router_model: multilingual
+    max_len: 1024

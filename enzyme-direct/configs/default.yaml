@@ -105,3 +105,20 @@ esm:
 #    nn-homologs (paired exact McNemar p < 0.05, esm ahead).
 #  - Secondary: hybrid-nn-esm vs nn-homologs on all 210 proteins, same test.
 #  - Any later fine-tuned Laya must beat esm-probe on ec1 to be worth reporting as useful.
+# ---------------------------------------------------------------- embedding neighbours, exact EC
+# Precomputed ProtT5 per-protein embeddings for all of Swiss-Prot, published by UniProt (no GPU
+# needed; ProtT5 replaces ESM-2 here because its embeddings exist for the whole reference).
+# Reference: CARE's training set with every benchmark protein removed (as for the MMseqs2 search).
+# Queries: ec1 (210) and ec4 (110) together. Scored at the exact EC (level 4) and at level 1.
+#   mmseqs-nn   EC of the best MMseqs2 hit (same search as the homologs section)
+#   emb-nn      EC of the reference protein with the highest cosine similarity of embeddings
+#   hybrid      mmseqs-nn, and emb-nn for proteins without any MMseqs2 hit
+# (a neighbour with several ECs contributes the first in sort order, for both methods)
+embeddings:
+  url: https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/embeddings/uniprot_sprot/per-protein.h5
+  file: raw/sprot_prott5_per_protein.h5
+# Pre-registered reading (fixed before the run):
+#  - Primary: hybrid beats mmseqs-nn at the exact EC on ec1+ec4 (paired exact McNemar p < 0.05,
+#    hybrid ahead). Its gain can only come from proteins without a hit.
+#  - Secondary: emb-nn vs mmseqs-nn at the exact EC on all 320 proteins, same test.
+#  - Descriptive: accuracy by subset (no hit / best hit < 30% / >= 30% identity).

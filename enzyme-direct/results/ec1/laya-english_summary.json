@@ -1,0 +1,65 @@
+{
+  "n": 210,
+  "n_classes": 6,
+  "correct": 34,
+  "accuracy": 16.2,
+  "accuracy_ci95": [
+    11.8,
+    21.8
+  ],
+  "chance_accuracy": 16.7,
+  "p_vs_chance_one_sided": 0.602,
+  "macro_f1": 9.4,
+  "log_loss": 1.898,
+  "log_loss_uniform": 1.792,
+  "brier": 0.871,
+  "brier_uniform": 0.833,
+  "mean_top_probability": 0.276,
+  "passes_gate": false,
+  "per_class": {
+    "1": {
+      "n": 35,
+      "correct": 22,
+      "accuracy": 62.9,
+      "precision": 16.4,
+      "n_predicted": 134
+    },
+    "2": {
+      "n": 35,
+      "correct": 1,
+      "accuracy": 2.9,
+      "precision": 50.0,
+      "n_predicted": 2
+    },
+    "3": {
+      "n": 35,
+      "correct": 1,
+      "accuracy": 2.9,
+      "precision": 7.1,
+      "n_predicted": 14
+    },
+    "4": {
+      "n": 35,
+      "correct": 0,
+      "accuracy": 0.0,
+      "precision": 0.0,
+      "n_predicted": 0
+    },
+    "5": {
+      "n": 35,
+      "correct": 0,
+      "accuracy": 0.0,
+      "precision": 0.0,
+      "n_predicted": 0
+    },
+    "6": {
+      "n": 35,
+      "correct": 10,
+      "accuracy": 28.6,
+      "precision": 16.7,
+      "n_predicted": 60
+    }
+  },
+  "model": "convaiinnovations/laya (laya-english)",
+  "max_input_tokens": 550
+}

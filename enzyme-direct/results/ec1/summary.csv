@@ -1,0 +1,4 @@
+model,n,accuracy,ci95_low,ci95_high,chance,p_vs_chance,macro_f1,log_loss,log_loss_uniform,passes_gate,acc_1,acc_2,acc_3,acc_4,acc_5,acc_6
+jev,210,11.9,8.2,17.0,16.7,0.978,4.4,2.3,1.792,False,68.6,0.0,2.9,0.0,0.0,0.0
+laya-english,210,16.2,11.8,21.8,16.7,0.602,9.4,1.898,1.792,False,62.9,2.9,2.9,0.0,0.0,28.6
+laya-multilingual,210,15.7,11.4,21.2,16.7,0.672,5.5,2.099,1.792,False,0.0,0.0,0.0,2.9,91.4,0.0

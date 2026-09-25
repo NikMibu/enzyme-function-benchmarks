@@ -28,7 +28,7 @@ bench = pd.read_csv(config.BENCH / f"{args.stage}.tsv", sep="\t", dtype=str)
 truth_col = "ec1" if args.stage == "ec1" else "ec"
 if args.stage == "ec1":
     classes = list(prompts.EC1_CLASSES)
-    ticks = [f"{c} {prompts.EC1_CLASSES[c][0][:5]}." for c in classes]
+    ticks = [f"{c} {prompts.EC1_CLASSES[c][0]}" for c in classes]
 else:
     classes = list(pd.read_csv(config.BENCH / "ec4_labels.tsv", sep="\t", dtype=str).ec)
     ticks = classes
@@ -77,7 +77,7 @@ K = len(classes)
 size = 3.2 if K <= 6 else 4.6
 fig, axes = plt.subplots(1, len(done), figsize=(size * len(done) + 0.8, size + 0.9), squeeze=False)
 for ax, (m, s, cm) in zip(axes[0], done):
-    frac = cm.div(cm.sum(1), axis=0)
+    frac = cm.div(cm.sum(axis=1), axis=0)
     ax.imshow(frac.to_numpy(), cmap=BLUES, vmin=0, vmax=1)
     for i in range(K):
         for j in range(K):

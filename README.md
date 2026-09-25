@@ -1,39 +1,37 @@
 # enzyme-function-benchmarks
 
-Experimente zur Frage, wie gut sich die Funktion eines Enzyms (seine EC-Nummer) vorhersagen lässt:
-mit Homologie-Suche, gelernten Integratoren, allgemeinen Entscheidungsmodellen (TypeSafe Jev,
-Laya) und Protein-Sprachmodellen (ESM-2, ProtT5). Beide Experimente sind abgeschlossen.
+Experiments on how well an enzyme's function (its EC number) can be predicted: with homology
+search, learned integrators, general-purpose decision models (TypeSafe Jev, Laya) and protein
+language models (ESM-2, ProtT5). Both experiments are concluded.
 
-**Gesamtfazit: [`FINDINGS.md`](FINDINGS.md)**
+**Overall findings: [`FINDINGS.md`](FINDINGS.md)**
 
-## Ergebnis in Kürze
+## Results in brief
 
-* **Die Leistung kommt aus der Homologie-Suche.** Jev und Laya erreichen in keinem Versuch mehr als
-  ein einfaches Verfahren mit denselben Informationen. Auf der reinen Sequenz liegen sie auf
-  Zufallsniveau, mit Homologie-Belegen gleichauf mit dem Nächsten Nachbarn.
-* **Protein-Sprachmodelle lesen Funktion aus der Sequenz:** Eine ESM-2-Probe erreicht 51,9 % bei
-  der EC-Klasse, ohne einen einzigen erkennbaren Homolog im Training.
-* **Einziger signifikanter Gewinn über die Homologie-Suche:** ProtT5-Embedding-Nachbarn als Rückfall
-  für Proteine ohne MMseqs2-Treffer, 64,4 % statt 62,5 % bei der exakten EC (p = 0,031).
-* **Verlässliche Konfidenz:** LightGBM über die Homologie-Belege halbiert grob die Fläche unter der
-  Risiko-Abdeckungs-Kurve (0,092 gegen 0,173) und sagt damit besser, wann man einer Vorhersage
-  trauen kann.
+* **Performance comes from homology search.** Jev and Laya never do better than a simple method
+  given the same information. On raw sequence they are at chance; with homolog evidence they tie
+  the nearest neighbour.
+* **Protein language models read function from sequence:** an ESM-2 probe reaches 51.9% on the EC
+  class without a single detectable homolog in its training set.
+* **The only significant gain over homology search:** ProtT5 embedding neighbours as a fallback for
+  proteins without an MMseqs2 hit, 64.4% instead of 62.5% on the exact EC (p = 0.031).
+* **Reliable confidence:** LightGBM over the homolog evidence roughly halves the area under the
+  risk–coverage curve (0.092 vs 0.173), so it tells better when a prediction can be trusted.
 
-## Inhalt
+## Contents
 
-| Ordner | Frage | Daten |
+| Folder | Question | Data |
 |---|---|---|
-| [`enzyme-evidence/`](enzyme-evidence/) | Kann ein gelerntes Modell Homologie-Belege besser gewichten als der Nächste Nachbar? | CARE-Benchmark, Task 1 (1.140 Testproteine) |
-| [`enzyme-direct/`](enzyme-direct/) | Können Jev und Laya die Funktion aus der Sequenz ablesen, mit Kontext, mit Homologen? Wie schneiden Protein-Sprachmodelle ab? | Eigener Benchmark aus Swiss-Prot seit 2018, getrennt von den CARE-Testsets (320 Proteine) |
+| [`enzyme-evidence/`](enzyme-evidence/) | Can a learned model weigh homolog evidence better than the nearest neighbour? | CARE benchmark, Task 1 (1,140 test proteins) |
+| [`enzyme-direct/`](enzyme-direct/) | Can Jev and Laya read function from sequence, with context, with homologs? How do protein language models compare? | New benchmark from Swiss-Prot since 2018, separate from the CARE test sets (320 proteins) |
 
-Die beiden Ordner teilen keinen Code und keine Daten. Jeder hat seine eigene README mit Aufbau,
-allen Tabellen, Einschränkungen und Reproduktion (`requirements.txt`, nummerierte Skripte,
-`pytest -q`). Jev braucht `TYPESAFE_API_KEY`; alles andere läuft auf der CPU.
+The two folders share no code or data. Each has its own README with the setup, all tables,
+limitations and reproduction steps (`requirements.txt`, numbered scripts, `pytest -q`). Jev needs
+`TYPESAFE_API_KEY`; everything else runs on CPU.
 
-## Methodik
+## Methodology
 
-* Analysepläne und Pass-Kriterien sind vor jedem Lauf in Git festgeschrieben; nachträgliche
-  Auswertungen sind als solche markiert.
-* Jede Stufe hat eine Kontrolle mit genau derselben Information; Vergleiche nutzen gepaarte Tests.
-* Leckage-Tests sichern die Trennung von Trainings- und Testdaten; Benchmarks sind als Dateien
-  eingefroren.
+* Analysis plans and pass criteria are committed to git before each run; post-hoc analyses are
+  labelled as such.
+* Every stage has a control given exactly the same information; comparisons use paired tests.
+* Leakage tests keep training and test data apart; benchmarks are frozen as files.

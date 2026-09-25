@@ -1,0 +1,772 @@
+{
+  "embedding_file_last_modified": "Last-Modified: Thu, 03 Sep 2026 18:00:00 GMT",
+  "embeddings_in_file": 575736,
+  "reference_n": 173335,
+  "reference_with_embedding": 173324,
+  "benchmark_without_embedding": [],
+  "subset_sizes": {
+    "ec1": {
+      "hit < 30%": 25,
+      "hit >= 30%": 170,
+      "no hit": 15
+    },
+    "ec4": {
+      "hit < 30%": 9,
+      "hit >= 30%": 79,
+      "no hit": 22
+    }
+  },
+  "emb_cosine_by_subset": {
+    "hit < 30%": 0.843,
+    "hit >= 30%": 0.963,
+    "no hit": 0.723
+  },
+  "paired_tests": [
+    {
+      "a": "hybrid",
+      "b": "mmseqs-nn",
+      "level": "l4",
+      "n": 320,
+      "acc_a": 64.4,
+      "acc_b": 62.5,
+      "a_only_correct": 6,
+      "b_only_correct": 0,
+      "mcnemar_p": 0.0312
+    },
+    {
+      "a": "emb-nn",
+      "b": "mmseqs-nn",
+      "level": "l4",
+      "n": 320,
+      "acc_a": 61.6,
+      "acc_b": 62.5,
+      "a_only_correct": 11,
+      "b_only_correct": 14,
+      "mcnemar_p": 0.69
+    },
+    {
+      "a": "hybrid",
+      "b": "mmseqs-nn",
+      "level": "l1",
+      "n": 320,
+      "acc_a": 87.5,
+      "acc_b": 80.3,
+      "a_only_correct": 23,
+      "b_only_correct": 0,
+      "mcnemar_p": 2.38e-07
+    },
+    {
+      "a": "emb-nn",
+      "b": "mmseqs-nn",
+      "level": "l1",
+      "n": 320,
+      "acc_a": 85.3,
+      "acc_b": 80.3,
+      "a_only_correct": 25,
+      "b_only_correct": 9,
+      "mcnemar_p": 0.00904
+    }
+  ],
+  "pre_registered_reading": {
+    "hybrid_beats_mmseqs_exact_ec": true,
+    "emb_nn_beats_mmseqs_exact_ec": false
+  },
+  "accuracy": {
+    "ec1+ec4 | all | level 4": {
+      "mmseqs-nn": {
+        "n": 320,
+        "correct": 200,
+        "accuracy": 62.5,
+        "ci95": [
+          57.1,
+          67.6
+        ]
+      },
+      "emb-nn": {
+        "n": 320,
+        "correct": 197,
+        "accuracy": 61.6,
+        "ci95": [
+          56.1,
+          66.7
+        ]
+      },
+      "hybrid": {
+        "n": 320,
+        "correct": 206,
+        "accuracy": 64.4,
+        "ci95": [
+          59.0,
+          69.4
+        ]
+      }
+    },
+    "ec1+ec4 | all | level 1": {
+      "mmseqs-nn": {
+        "n": 320,
+        "correct": 257,
+        "accuracy": 80.3,
+        "ci95": [
+          75.6,
+          84.3
+        ]
+      },
+      "emb-nn": {
+        "n": 320,
+        "correct": 273,
+        "accuracy": 85.3,
+        "ci95": [
+          81.0,
+          88.8
+        ]
+      },
+      "hybrid": {
+        "n": 320,
+        "correct": 280,
+        "accuracy": 87.5,
+        "ci95": [
+          83.4,
+          90.7
+        ]
+      }
+    },
+    "ec1+ec4 | no hit | level 4": {
+      "mmseqs-nn": {
+        "n": 37,
+        "correct": 0,
+        "accuracy": 0.0,
+        "ci95": [
+          0.0,
+          9.4
+        ]
+      },
+      "emb-nn": {
+        "n": 37,
+        "correct": 6,
+        "accuracy": 16.2,
+        "ci95": [
+          7.7,
+          31.1
+        ]
+      },
+      "hybrid": {
+        "n": 37,
+        "correct": 6,
+        "accuracy": 16.2,
+        "ci95": [
+          7.7,
+          31.1
+        ]
+      }
+    },
+    "ec1+ec4 | no hit | level 1": {
+      "mmseqs-nn": {
+        "n": 37,
+        "correct": 0,
+        "accuracy": 0.0,
+        "ci95": [
+          0.0,
+          9.4
+        ]
+      },
+      "emb-nn": {
+        "n": 37,
+        "correct": 23,
+        "accuracy": 62.2,
+        "ci95": [
+          46.1,
+          75.9
+        ]
+      },
+      "hybrid": {
+        "n": 37,
+        "correct": 23,
+        "accuracy": 62.2,
+        "ci95": [
+          46.1,
+          75.9
+        ]
+      }
+    },
+    "ec1+ec4 | hit < 30% | level 4": {
+      "mmseqs-nn": {
+        "n": 34,
+        "correct": 9,
+        "accuracy": 26.5,
+        "ci95": [
+          14.6,
+          43.1
+        ]
+      },
+      "emb-nn": {
+        "n": 34,
+        "correct": 10,
+        "accuracy": 29.4,
+        "ci95": [
+          16.8,
+          46.2
+        ]
+      },
+      "hybrid": {
+        "n": 34,
+        "correct": 9,
+        "accuracy": 26.5,
+        "ci95": [
+          14.6,
+          43.1
+        ]
+      }
+    },
+    "ec1+ec4 | hit < 30% | level 1": {
+      "mmseqs-nn": {
+        "n": 34,
+        "correct": 26,
+        "accuracy": 76.5,
+        "ci95": [
+          60.0,
+          87.6
+        ]
+      },
+      "emb-nn": {
+        "n": 34,
+        "correct": 27,
+        "accuracy": 79.4,
+        "ci95": [
+          63.2,
+          89.7
+        ]
+      },
+      "hybrid": {
+        "n": 34,
+        "correct": 26,
+        "accuracy": 76.5,
+        "ci95": [
+          60.0,
+          87.6
+        ]
+      }
+    },
+    "ec1+ec4 | hit >= 30% | level 4": {
+      "mmseqs-nn": {
+        "n": 249,
+        "correct": 191,
+        "accuracy": 76.7,
+        "ci95": [
+          71.1,
+          81.5
+        ]
+      },
+      "emb-nn": {
+        "n": 249,
+        "correct": 181,
+        "accuracy": 72.7,
+        "ci95": [
+          66.8,
+          77.8
+        ]
+      },
+      "hybrid": {
+        "n": 249,
+        "correct": 191,
+        "accuracy": 76.7,
+        "ci95": [
+          71.1,
+          81.5
+        ]
+      }
+    },
+    "ec1+ec4 | hit >= 30% | level 1": {
+      "mmseqs-nn": {
+        "n": 249,
+        "correct": 231,
+        "accuracy": 92.8,
+        "ci95": [
+          88.9,
+          95.4
+        ]
+      },
+      "emb-nn": {
+        "n": 249,
+        "correct": 223,
+        "accuracy": 89.6,
+        "ci95": [
+          85.1,
+          92.8
+        ]
+      },
+      "hybrid": {
+        "n": 249,
+        "correct": 231,
+        "accuracy": 92.8,
+        "ci95": [
+          88.9,
+          95.4
+        ]
+      }
+    },
+    "ec1 | all | level 4": {
+      "mmseqs-nn": {
+        "n": 210,
+        "correct": 131,
+        "accuracy": 62.4,
+        "ci95": [
+          55.7,
+          68.7
+        ]
+      },
+      "emb-nn": {
+        "n": 210,
+        "correct": 126,
+        "accuracy": 60.0,
+        "ci95": [
+          53.3,
+          66.4
+        ]
+      },
+      "hybrid": {
+        "n": 210,
+        "correct": 133,
+        "accuracy": 63.3,
+        "ci95": [
+          56.6,
+          69.6
+        ]
+      }
+    },
+    "ec1 | all | level 1": {
+      "mmseqs-nn": {
+        "n": 210,
+        "correct": 182,
+        "accuracy": 86.7,
+        "ci95": [
+          81.4,
+          90.6
+        ]
+      },
+      "emb-nn": {
+        "n": 210,
+        "correct": 185,
+        "accuracy": 88.1,
+        "ci95": [
+          83.0,
+          91.8
+        ]
+      },
+      "hybrid": {
+        "n": 210,
+        "correct": 192,
+        "accuracy": 91.4,
+        "ci95": [
+          86.9,
+          94.5
+        ]
+      }
+    },
+    "ec1 | no hit | level 4": {
+      "mmseqs-nn": {
+        "n": 15,
+        "correct": 0,
+        "accuracy": 0.0,
+        "ci95": [
+          -0.0,
+          20.4
+        ]
+      },
+      "emb-nn": {
+        "n": 15,
+        "correct": 2,
+        "accuracy": 13.3,
+        "ci95": [
+          3.7,
+          37.9
+        ]
+      },
+      "hybrid": {
+        "n": 15,
+        "correct": 2,
+        "accuracy": 13.3,
+        "ci95": [
+          3.7,
+          37.9
+        ]
+      }
+    },
+    "ec1 | no hit | level 1": {
+      "mmseqs-nn": {
+        "n": 15,
+        "correct": 0,
+        "accuracy": 0.0,
+        "ci95": [
+          -0.0,
+          20.4
+        ]
+      },
+      "emb-nn": {
+        "n": 15,
+        "correct": 10,
+        "accuracy": 66.7,
+        "ci95": [
+          41.7,
+          84.8
+        ]
+      },
+      "hybrid": {
+        "n": 15,
+        "correct": 10,
+        "accuracy": 66.7,
+        "ci95": [
+          41.7,
+          84.8
+        ]
+      }
+    },
+    "ec1 | hit < 30% | level 4": {
+      "mmseqs-nn": {
+        "n": 25,
+        "correct": 4,
+        "accuracy": 16.0,
+        "ci95": [
+          6.4,
+          34.7
+        ]
+      },
+      "emb-nn": {
+        "n": 25,
+        "correct": 5,
+        "accuracy": 20.0,
+        "ci95": [
+          8.9,
+          39.1
+        ]
+      },
+      "hybrid": {
+        "n": 25,
+        "correct": 4,
+        "accuracy": 16.0,
+        "ci95": [
+          6.4,
+          34.7
+        ]
+      }
+    },
+    "ec1 | hit < 30% | level 1": {
+      "mmseqs-nn": {
+        "n": 25,
+        "correct": 18,
+        "accuracy": 72.0,
+        "ci95": [
+          52.4,
+          85.7
+        ]
+      },
+      "emb-nn": {
+        "n": 25,
+        "correct": 19,
+        "accuracy": 76.0,
+        "ci95": [
+          56.6,
+          88.5
+        ]
+      },
+      "hybrid": {
+        "n": 25,
+        "correct": 18,
+        "accuracy": 72.0,
+        "ci95": [
+          52.4,
+          85.7
+        ]
+      }
+    },
+    "ec1 | hit >= 30% | level 4": {
+      "mmseqs-nn": {
+        "n": 170,
+        "correct": 127,
+        "accuracy": 74.7,
+        "ci95": [
+          67.7,
+          80.6
+        ]
+      },
+      "emb-nn": {
+        "n": 170,
+        "correct": 119,
+        "accuracy": 70.0,
+        "ci95": [
+          62.7,
+          76.4
+        ]
+      },
+      "hybrid": {
+        "n": 170,
+        "correct": 127,
+        "accuracy": 74.7,
+        "ci95": [
+          67.7,
+          80.6
+        ]
+      }
+    },
+    "ec1 | hit >= 30% | level 1": {
+      "mmseqs-nn": {
+        "n": 170,
+        "correct": 164,
+        "accuracy": 96.5,
+        "ci95": [
+          92.5,
+          98.4
+        ]
+      },
+      "emb-nn": {
+        "n": 170,
+        "correct": 156,
+        "accuracy": 91.8,
+        "ci95": [
+          86.7,
+          95.0
+        ]
+      },
+      "hybrid": {
+        "n": 170,
+        "correct": 164,
+        "accuracy": 96.5,
+        "ci95": [
+          92.5,
+          98.4
+        ]
+      }
+    },
+    "ec4 | all | level 4": {
+      "mmseqs-nn": {
+        "n": 110,
+        "correct": 69,
+        "accuracy": 62.7,
+        "ci95": [
+          53.4,
+          71.2
+        ]
+      },
+      "emb-nn": {
+        "n": 110,
+        "correct": 71,
+        "accuracy": 64.5,
+        "ci95": [
+          55.3,
+          72.9
+        ]
+      },
+      "hybrid": {
+        "n": 110,
+        "correct": 73,
+        "accuracy": 66.4,
+        "ci95": [
+          57.1,
+          74.5
+        ]
+      }
+    },
+    "ec4 | all | level 1": {
+      "mmseqs-nn": {
+        "n": 110,
+        "correct": 75,
+        "accuracy": 68.2,
+        "ci95": [
+          59.0,
+          76.1
+        ]
+      },
+      "emb-nn": {
+        "n": 110,
+        "correct": 88,
+        "accuracy": 80.0,
+        "ci95": [
+          71.6,
+          86.4
+        ]
+      },
+      "hybrid": {
+        "n": 110,
+        "correct": 88,
+        "accuracy": 80.0,
+        "ci95": [
+          71.6,
+          86.4
+        ]
+      }
+    },
+    "ec4 | no hit | level 4": {
+      "mmseqs-nn": {
+        "n": 22,
+        "correct": 0,
+        "accuracy": 0.0,
+        "ci95": [
+          0.0,
+          14.9
+        ]
+      },
+      "emb-nn": {
+        "n": 22,
+        "correct": 4,
+        "accuracy": 18.2,
+        "ci95": [
+          7.3,
+          38.5
+        ]
+      },
+      "hybrid": {
+        "n": 22,
+        "correct": 4,
+        "accuracy": 18.2,
+        "ci95": [
+          7.3,
+          38.5
+        ]
+      }
+    },
+    "ec4 | no hit | level 1": {
+      "mmseqs-nn": {
+        "n": 22,
+        "correct": 0,
+        "accuracy": 0.0,
+        "ci95": [
+          0.0,
+          14.9
+        ]
+      },
+      "emb-nn": {
+        "n": 22,
+        "correct": 13,
+        "accuracy": 59.1,
+        "ci95": [
+          38.7,
+          76.7
+        ]
+      },
+      "hybrid": {
+        "n": 22,
+        "correct": 13,
+        "accuracy": 59.1,
+        "ci95": [
+          38.7,
+          76.7
+        ]
+      }
+    },
+    "ec4 | hit < 30% | level 4": {
+      "mmseqs-nn": {
+        "n": 9,
+        "correct": 5,
+        "accuracy": 55.6,
+        "ci95": [
+          26.7,
+          81.1
+        ]
+      },
+      "emb-nn": {
+        "n": 9,
+        "correct": 5,
+        "accuracy": 55.6,
+        "ci95": [
+          26.7,
+          81.1
+        ]
+      },
+      "hybrid": {
+        "n": 9,
+        "correct": 5,
+        "accuracy": 55.6,
+        "ci95": [
+          26.7,
+          81.1
+        ]
+      }
+    },
+    "ec4 | hit < 30% | level 1": {
+      "mmseqs-nn": {
+        "n": 9,
+        "correct": 8,
+        "accuracy": 88.9,
+        "ci95": [
+          56.5,
+          98.0
+        ]
+      },
+      "emb-nn": {
+        "n": 9,
+        "correct": 8,
+        "accuracy": 88.9,
+        "ci95": [
+          56.5,
+          98.0
+        ]
+      },
+      "hybrid": {
+        "n": 9,
+        "correct": 8,
+        "accuracy": 88.9,
+        "ci95": [
+          56.5,
+          98.0
+        ]
+      }
+    },
+    "ec4 | hit >= 30% | level 4": {
+      "mmseqs-nn": {
+        "n": 79,
+        "correct": 64,
+        "accuracy": 81.0,
+        "ci95": [
+          71.0,
+          88.1
+        ]
+      },
+      "emb-nn": {
+        "n": 79,
+        "correct": 62,
+        "accuracy": 78.5,
+        "ci95": [
+          68.2,
+          86.1
+        ]
+      },
+      "hybrid": {
+        "n": 79,
+        "correct": 64,
+        "accuracy": 81.0,
+        "ci95": [
+          71.0,
+          88.1
+        ]
+      }
+    },
+    "ec4 | hit >= 30% | level 1": {
+      "mmseqs-nn": {
+        "n": 79,
+        "correct": 67,
+        "accuracy": 84.8,
+        "ci95": [
+          75.3,
+          91.1
+        ]
+      },
+      "emb-nn": {
+        "n": 79,
+        "correct": 67,
+        "accuracy": 84.8,
+        "ci95": [
+          75.3,
+          91.1
+        ]
+      },
+      "hybrid": {
+        "n": 79,
+        "correct": 67,
+        "accuracy": 84.8,
+        "ci95": [
+          75.3,
+          91.1
+        ]
+      }
+    }
+  }
+}

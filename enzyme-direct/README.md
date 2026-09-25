@@ -6,7 +6,7 @@ A sibling of `../enzyme-evidence/`. It shares no code, data or results with it.
 checkpoints) classify an enzyme's function from its amino-acid sequence alone, with no
 retrieval, homologs, names or annotations?
 
-**Answer (v0.4).**
+**Answer (v0.5).**
 
 * **From the raw sequence: no.** On a balanced six-class EC level-1 benchmark (210 held-out
   proteins), none of the three models is above chance (16.7%). Each one collapses onto one or
@@ -28,8 +28,14 @@ retrieval, homologs, names or annotations?
   protein, reaches **51.9%**. That is the sequence-only bar a fine-tuned Laya would have to beat.
   It does not beat homology search where hits exist, even weak ones, but it answers 5 of the 15
   proteins that have no hit at all.
+* **Embedding neighbours fill the gap that sequence search leaves.** With UniProt's precomputed
+  ProtT5 embeddings, the nearest reference protein by cosine similarity finds the right class
+  for 23 of the 37 benchmark proteins that MMseqs2 finds no hit for (ec1 + ec4). Using it only
+  for those proteins raises exact-EC accuracy from 62.5% to 64.4% (6 gained, 0 lost, p = 0.03)
+  and class accuracy from 80.3% to 87.5%.
 * No model passed the gate on sequence alone, so the harder exact-EC benchmark
-  (`benchmarks/ec4.tsv`) was built but **not run**.
+  (`benchmarks/ec4.tsv`) was not run with the decision models. It is used with the retrieval
+  methods in the embedding section.
 
 ![](results/figures/ladder_ec1.png)
 
@@ -192,6 +198,60 @@ ESM-2's nearest neighbour is weak here (31%) because its training set has no hom
 test proteins by construction: the closest embedding belongs to an unrelated family. The probe
 generalises across families; the nearest neighbour cannot.
 
+## Embedding neighbours for the exact EC (ProtT5, ec1 + ec4)
+
+`scripts/08_embedding_nn.py`, results in `results/embeddings/`. UniProt publishes ProtT5
+per-protein embeddings for all of Swiss-Prot (575,736 proteins, file dated 3 Sep 2026), so no
+GPU is needed: the reference and the benchmark proteins are already embedded. ProtT5 stands in
+for ESM-2 here for that reason. The reference is CARE's training set with every benchmark
+protein removed (173,335 proteins, of which 173,324 have an embedding in the file). The queries are both benchmarks,
+ec1 (210) and ec4 (110, 11 exact ECs). The plan and reading were committed before the run
+(commit `ed4b12f`).
+
+Methods: **MMseqs2 NN** (EC of the best hit, as before), **embedding NN** (EC of the reference
+protein with the highest cosine similarity), and **hybrid** (MMseqs2 NN, embedding NN only for
+proteins without an MMseqs2 hit).
+
+| ec1 + ec4 (320 proteins) | MMseqs2 NN | Embedding NN | Hybrid |
+|---|---|---|---|
+| Exact EC (level 4) | 62.5 | 61.6 | **64.4** |
+| EC class (level 1) | 80.3 | 85.3 | **87.5** |
+
+By how well MMseqs2 finds the protein (exact EC / EC class, % correct):
+
+| Subset | n | MMseqs2 NN | Embedding NN | Median cosine of embedding NN |
+|---|---|---|---|---|
+| No hit | 37 | 0 / 0 | **16.2 / 62.2** | 0.72 |
+| Best hit < 30% identity | 34 | 26.5 / 76.5 | 29.4 / 79.4 | 0.84 |
+| Best hit ≥ 30% identity | 249 | **76.7 / 92.8** | 72.7 / 89.6 | 0.96 |
+
+Paired tests on all 320 proteins (exact McNemar, `results/embeddings/report.json`):
+
+| Comparison | Level | Δ (points) | Only first / only second right | p |
+|---|---|---|---|---|
+| Hybrid vs MMseqs2 NN | exact EC | +1.9 | 6 / 0 | 0.031 |
+| Embedding NN vs MMseqs2 NN | exact EC | −0.9 | 11 / 14 | 0.69 |
+| Hybrid vs MMseqs2 NN | class | +7.2 | 23 / 0 | 2×10⁻⁷ |
+| Embedding NN vs MMseqs2 NN | class | +5.0 | 25 / 9 | 0.009 |
+
+Pre-registered reading:
+* The hybrid beats MMseqs2 alone at the exact EC: **yes**, narrowly (p = 0.031). The gain comes
+  only from proteins without a hit, as designed, and it never costs a correct answer.
+* Embedding NN alone beats MMseqs2 at the exact EC: **no** (tied). Where MMseqs2 finds a good hit
+  it is slightly better; where it finds nothing, embeddings still get the class right for about
+  six in ten proteins, though the exact EC for only one in six.
+
+Other observations:
+* On ec1, the embedding hybrid reaches 91.4% at level 1, against 86.7% for MMseqs2 NN and
+  87.1% for Jev with homolog evidence. On the 15 ec1 proteins without a hit it gets the class
+  for 10, where the ESM-2 probe (trained on 3,000 proteins, no homologs) got 5.
+* ec4, the exact-EC benchmark, is much harder for retrieval: 22 of its 110 proteins have no
+  MMseqs2 hit. MMseqs2 NN gets 62.7% of exact ECs, the hybrid 66.4%.
+* The embedding similarity is lower when there is no hit (median cosine 0.72 vs 0.96), so it
+  could serve as a confidence signal. Not tested here.
+* ProtT5 was trained on UniRef50, which may include these sequences (without annotations).
+  That does not leak labels, but the embeddings are not blind to the proteins.
+
 ## Design
 
 ```
@@ -247,6 +307,7 @@ python scripts/04_controls.py                              # logistic regression
 python scripts/06_homologs.py                              # homolog evidence for Jev (~195 calls)
 python scripts/07_esm.py                                   # ESM-2 embeddings on CPU, ~70 min
 python scripts/05_compare.py                               # ladder table, paired tests, figures
+python scripts/08_embedding_nn.py                          # needs UniProt's per-protein.h5 (1.4 GB) in data/raw/
 pytest -q
 ```
 
@@ -289,4 +350,5 @@ compare against the committed TSVs.
 | ec1 context ladder for Jev (levels 1–2), logistic-regression controls, nearest neighbour | done: Jev reaches 27.1% with motifs, below its control (32.9%) and the gate |
 | ec1 with homolog evidence (enzyme-evidence setup) | done: Jev 87.1% (level 1) / 60.0% (level 4), tied with nearest neighbour |
 | ESM-2 650M probe and hard subset | done: 51.9% without homologs in training; helps only for proteins with no hit |
+| ProtT5 embedding neighbours, exact EC, ec1 + ec4 | done: hybrid beats MMseqs2 NN (64.4 vs 62.5%, p = 0.03) by answering proteins without a hit |
 | ec4 benchmark (11 exact ECs × 10, chance 9.1%) | built, **not run**: no model passed the ec1 gate |

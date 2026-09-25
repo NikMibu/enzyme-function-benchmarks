@@ -68,3 +68,19 @@ controls:
 #  - Jev "uses the context" at a level if it passes the gate above at that level.
 #  - Jev "adds to the context" if it beats that level's logistic-regression control, paired exact
 #    McNemar test p < 0.05 (two-sided) with Jev ahead.
+# ---------------------------------------------------------------- homolog evidence (ec1 only)
+# The enzyme-evidence setup on this benchmark: MMseqs2 search against CARE's training set with
+# the benchmark proteins removed (same parameters as enzyme-evidence), top-k hits -> one candidate
+# per exact EC with identity, coverage, rank and support; Jev chooses among them (or 'none').
+# Scored at level 1 (class of the chosen EC) and level 4 (exact EC). Proteins without a hit get
+# no prediction from any hit-based method (scored wrong).
+homologs:
+  sensitivity: 7.5
+  max_seqs: 1000
+  evalue: 0.001
+  top_k_hits: 10
+  max_candidates: 10
+# Pre-registered reading (fixed before the run): Jev "adds to homolog evidence" if its level-1
+# accuracy beats the nearest neighbour from the same search (paired exact McNemar p < 0.05, Jev
+# ahead). Level 4 is reported the same way as a secondary result. A hybrid that uses Jev's
+# level-2 (motif) answer for proteins without a hit is reported as secondary as well.

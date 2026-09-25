@@ -1,0 +1,88 @@
+{
+  "k": 10,
+  "code_commit_at_run": "6557560cfaf859f608ada87988ad8efe7d0d5dbc",
+  "care_commit": "e570c36300bce1dd345bb726612784e518aae6b9",
+  "n_leaky_30": 99,
+  "paired_vs_nearest_neighbour": {
+    "weighted_vote|30": {
+      "delta_L4": -0.7,
+      "ci95": [
+        -2.8,
+        1.4
+      ],
+      "wins": 9,
+      "losses": 12,
+      "mcnemar_p": 0.6636
+    },
+    "weighted_vote|30-50": {
+      "delta_L4": -0.5,
+      "ci95": [
+        -2.7,
+        1.6
+      ],
+      "wins": 16,
+      "losses": 19,
+      "mcnemar_p": 0.7359
+    },
+    "weighted_vote|price": {
+      "delta_L4": -9.5,
+      "ci95": [
+        -16.2,
+        -2.7
+      ],
+      "wins": 6,
+      "losses": 20,
+      "mcnemar_p": 0.0094
+    },
+    "weighted_vote|pooled": {
+      "delta_L4": -1.8,
+      "ci95": [
+        -3.2,
+        -0.1
+      ],
+      "wins": 31,
+      "losses": 51,
+      "mcnemar_p": 0.0352
+    },
+    "lightgbm|30": {
+      "delta_L4": 0.2,
+      "ci95": [
+        -1.2,
+        1.6
+      ],
+      "wins": 5,
+      "losses": 4,
+      "mcnemar_p": 1.0
+    },
+    "lightgbm|30-50": {
+      "delta_L4": 0.5,
+      "ci95": [
+        -0.5,
+        1.8
+      ],
+      "wins": 7,
+      "losses": 4,
+      "mcnemar_p": 0.5488
+    },
+    "lightgbm|price": {
+      "delta_L4": 0.0,
+      "ci95": [
+        -2.0,
+        2.0
+      ],
+      "wins": 1,
+      "losses": 1,
+      "mcnemar_p": 1.0
+    },
+    "lightgbm|pooled": {
+      "delta_L4": 0.4,
+      "ci95": [
+        -0.4,
+        1.1
+      ],
+      "wins": 13,
+      "losses": 9,
+      "mcnemar_p": 0.5235
+    }
+  }
+}

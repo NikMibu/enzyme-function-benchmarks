@@ -97,3 +97,17 @@ def to_care_csv(p: pd.DataFrame, path, k: int = 10) -> None:
     for i in range(k):
         cols[str(i)] = p.ranked.apply(lambda r: r[i] if len(r) > i else None)
     pd.DataFrame(cols).to_csv(path, index=False)
+
+
+def aurc(conf: np.ndarray, correct: np.ndarray) -> float:
+    return float(np.mean(1 - risk_coverage(conf, correct)[1]))
+
+
+def paired_aurc(conf_a, correct_a, conf_b, correct_b, n_boot: int = 2000, seed: int = 0) -> dict:
+    """AURC(a) - AURC(b) over the same proteins, with a paired bootstrap 95% CI (negative = a better)."""
+    rng = np.random.default_rng(seed)
+    n = len(conf_a)
+    d = [aurc(conf_a[i], correct_a[i]) - aurc(conf_b[i], correct_b[i])
+         for i in (rng.integers(0, n, n) for _ in range(n_boot))]
+    return {"delta_AURC": round(aurc(conf_a, correct_a) - aurc(conf_b, correct_b), 3),
+            "ci95": [round(float(np.percentile(d, 2.5)), 3), round(float(np.percentile(d, 97.5)), 3)]}

@@ -1,3 +1,5 @@
+> **Research prototype:** [`enzyme-evidence/`](enzyme-evidence/) — evidence integration for enzyme EC classification on the CARE benchmark (retrieval + learned integrators, leakage-safe evaluation).
+
 Projektidee: BioCloud – Eine KI-gestützte Bioinformatik-Plattform
 Ziel
 Entwicklung einer Web-App mit Flask, die FASTA-Dateien hochlädt, Sequenzen analysiert, visualisiert, klassifiziert und mit synthetischen Daten trainiert, während die gesamte Pipeline auf AWS mit Docker läuft.

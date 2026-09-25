@@ -1,0 +1,142 @@
+{
+  "30": {
+    "LightGBM | P(correct)": 0.134,
+    "NN | identity": 0.176,
+    "LightGBM vs NN | identity": {
+      "delta_AURC": -0.042,
+      "ci95": [
+        -0.069,
+        -0.015
+      ]
+    },
+    "NN | bitscore": 0.17,
+    "LightGBM vs NN | bitscore": {
+      "delta_AURC": -0.035,
+      "ci95": [
+        -0.064,
+        -0.006
+      ]
+    },
+    "NN | identity x coverage": 0.168,
+    "LightGBM vs NN | identity x coverage": {
+      "delta_AURC": -0.034,
+      "ci95": [
+        -0.059,
+        -0.009
+      ]
+    },
+    "NN | vote share of NN EC": 0.171,
+    "LightGBM vs NN | vote share of NN EC": {
+      "delta_AURC": -0.037,
+      "ci95": [
+        -0.055,
+        0.002
+      ]
+    }
+  },
+  "30-50": {
+    "LightGBM | P(correct)": 0.036,
+    "NN | identity": 0.076,
+    "LightGBM vs NN | identity": {
+      "delta_AURC": -0.04,
+      "ci95": [
+        -0.061,
+        -0.02
+      ]
+    },
+    "NN | bitscore": 0.117,
+    "LightGBM vs NN | bitscore": {
+      "delta_AURC": -0.081,
+      "ci95": [
+        -0.115,
+        -0.051
+      ]
+    },
+    "NN | identity x coverage": 0.08,
+    "LightGBM vs NN | identity x coverage": {
+      "delta_AURC": -0.044,
+      "ci95": [
+        -0.067,
+        -0.023
+      ]
+    },
+    "NN | vote share of NN EC": 0.066,
+    "LightGBM vs NN | vote share of NN EC": {
+      "delta_AURC": -0.029,
+      "ci95": [
+        -0.041,
+        -0.003
+      ]
+    }
+  },
+  "price": {
+    "LightGBM | P(correct)": 0.508,
+    "NN | identity": 0.47,
+    "LightGBM vs NN | identity": {
+      "delta_AURC": 0.038,
+      "ci95": [
+        -0.06,
+        0.127
+      ]
+    },
+    "NN | bitscore": 0.471,
+    "LightGBM vs NN | bitscore": {
+      "delta_AURC": 0.037,
+      "ci95": [
+        -0.077,
+        0.144
+      ]
+    },
+    "NN | identity x coverage": 0.463,
+    "LightGBM vs NN | identity x coverage": {
+      "delta_AURC": 0.045,
+      "ci95": [
+        -0.053,
+        0.137
+      ]
+    },
+    "NN | vote share of NN EC": 0.592,
+    "LightGBM vs NN | vote share of NN EC": {
+      "delta_AURC": -0.085,
+      "ci95": [
+        -0.145,
+        -0.016
+      ]
+    }
+  },
+  "all": {
+    "LightGBM | P(correct)": 0.092,
+    "NN | identity": 0.168,
+    "LightGBM vs NN | identity": {
+      "delta_AURC": -0.076,
+      "ci95": [
+        -0.099,
+        -0.055
+      ]
+    },
+    "NN | bitscore": 0.188,
+    "LightGBM vs NN | bitscore": {
+      "delta_AURC": -0.096,
+      "ci95": [
+        -0.124,
+        -0.07
+      ]
+    },
+    "NN | identity x coverage": 0.173,
+    "LightGBM vs NN | identity x coverage": {
+      "delta_AURC": -0.081,
+      "ci95": [
+        -0.106,
+        -0.058
+      ]
+    },
+    "NN | vote share of NN EC": 0.132,
+    "LightGBM vs NN | vote share of NN EC": {
+      "delta_AURC": -0.04,
+      "ci95": [
+        -0.049,
+        -0.018
+      ]
+    }
+  }
+}

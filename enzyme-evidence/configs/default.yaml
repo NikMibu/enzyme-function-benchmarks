@@ -1,31 +1,30 @@
-# All choices here are made on the dev set only. `frozen: true` is required before
-# scripts/05_run_test.py will touch the CARE test splits.
 seed: 42
-frozen: false
-
+frozen: true
 care:
   repo: https://github.com/jsunn-y/CARE
   commit: e570c36300bce1dd345bb726612784e518aae6b9
   dir: data/raw/CARE
-
-test_splits: ["30", "30-50", "price"]   # promiscuous excluded (near-duplicate homologs in train)
-
+test_splits:
+- '30'
+- 30-50
+- price
 dev:
-  max_per_ec3: 3        # mirrors CARE's test construction
-  fit_pool_max: 8000    # training queries for learned integrators (never dev-eval, never test)
-
+  max_per_ec3: 3
+  fit_pool_max: 8000
 retrieval:
   mmseqs_release: 17-b804f
   sensitivity: 7.5
   max_seqs: 1000
-  evalue: 1.0e-3
+  evalue: 0.001
   threads: 4
-
 candidates:
-  top_k_hits: 10        # overwritten by 04_tune_dev.py
-  k_grid: [5, 10, 25, 50]
+  top_k_hits: 10
+  k_grid:
+  - 5
+  - 10
+  - 25
+  - 50
   max_candidates: 10
-
 lgbm:
   n_estimators: 300
   learning_rate: 0.05
@@ -34,7 +33,6 @@ lgbm:
   subsample: 0.8
   subsample_freq: 1
   colsample_bytree: 0.8
-
 jev:
   endpoint: https://api.typesafe.ai/v1/systemone
   model: jev-1.13.0

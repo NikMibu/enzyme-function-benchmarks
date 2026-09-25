@@ -1,0 +1,64 @@
+{
+  "n": 210,
+  "n_classes": 6,
+  "correct": 109,
+  "accuracy": 51.9,
+  "accuracy_ci95": [
+    45.2,
+    58.6
+  ],
+  "chance_accuracy": 16.7,
+  "p_vs_chance_one_sided": 1.45e-31,
+  "macro_f1": 50.9,
+  "log_loss": 2.795,
+  "log_loss_uniform": 1.792,
+  "brier": 0.808,
+  "brier_uniform": 0.833,
+  "mean_top_probability": 0.857,
+  "passes_gate": true,
+  "per_class": {
+    "1": {
+      "n": 35,
+      "correct": 22,
+      "accuracy": 62.9,
+      "precision": 50.0,
+      "n_predicted": 44
+    },
+    "2": {
+      "n": 35,
+      "correct": 21,
+      "accuracy": 60.0,
+      "precision": 38.9,
+      "n_predicted": 54
+    },
+    "3": {
+      "n": 35,
+      "correct": 24,
+      "accuracy": 68.6,
+      "precision": 52.2,
+      "n_predicted": 46
+    },
+    "4": {
+      "n": 35,
+      "correct": 17,
+      "accuracy": 48.6,
+      "precision": 48.6,
+      "n_predicted": 35
+    },
+    "5": {
+      "n": 35,
+      "correct": 6,
+      "accuracy": 17.1,
+      "precision": 60.0,
+      "n_predicted": 10
+    },
+    "6": {
+      "n": 35,
+      "correct": 19,
+      "accuracy": 54.3,
+      "precision": 90.5,
+      "n_predicted": 21
+    }
+  },
+  "model": "esm-probe"
+}

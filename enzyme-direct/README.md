@@ -6,7 +6,7 @@ A sibling of `../enzyme-evidence/`. It shares no code, data or results with it.
 checkpoints) classify an enzyme's function from its amino-acid sequence alone, with no
 retrieval, homologs, names or annotations?
 
-**Answer (v0.3).**
+**Answer (v0.4).**
 
 * **From the raw sequence: no.** On a balanced six-class EC level-1 benchmark (210 held-out
   proteins), none of the three models is above chance (16.7%). Each one collapses onto one or
@@ -23,6 +23,11 @@ retrieval, homologs, names or annotations?
 * **Given homolog evidence (the `../enzyme-evidence` setup), Jev matches the nearest
   neighbour again:** 87.1% vs 86.7% at EC level 1, and 60.0% vs 62.4% for the exact EC (both
   differences not significant). The retrieval does the work; Jev adds nothing measurable.
+* **A protein language model does read function from sequence:** ESM-2 (650M) with a linear
+  probe, trained on 3,000 CARE proteins that contain no detectable homolog of any benchmark
+  protein, reaches **51.9%**. That is the sequence-only bar a fine-tuned Laya would have to beat.
+  It does not beat homology search where hits exist, even weak ones, but it answers 5 of the 15
+  proteins that have no hit at all.
 * No model passed the gate on sequence alone, so the harder exact-EC benchmark
   (`benchmarks/ec4.tsv`) was built but **not run**.
 
@@ -142,6 +147,51 @@ Pre-registered reading: Jev does **not** add to the homolog evidence.
 * **Same pattern as enzyme-evidence** (Jev 69.1% vs NN 69.5% on the CARE test sets), now
   confirmed on independent, recent Swiss-Prot proteins.
 
+## ESM-2: the sequence-only reference
+
+`scripts/07_esm.py`. Mean-pooled last-layer embeddings of `facebook/esm2_t33_650M_UR50D`,
+computed on CPU (about 1.3 s per protein). The training set has 3,000 proteins (500 per
+class) from CARE's training set with one complete EC. It excludes every protein that MMseqs2
+finds as a hit (e ≤ 10⁻³) of any ec1 protein (23,056 excluded), so the probe cannot rely on
+detectable homology to a test protein. The plan and reading were committed before the run
+(commit `16e8082`).
+
+| Method (trained on the same 3,000 proteins) | Accuracy (95% CI) | Gate |
+|---|---|---|
+| **ESM-2 probe** (logistic regression on embeddings) | **51.9** (45.2–58.6) | pass |
+| ESM-2 nearest neighbour (cosine) | 31.0 (25.1–37.5) | fail |
+| LogReg on properties & composition | 30.5 (24.6–37.0) | fail |
+
+ESM-2 probe vs the same features without ESM: +21.4 points (63 / 18 discordant, p = 5×10⁻⁷).
+Against Jev with motifs: +24.8 points (p = 3×10⁻⁷). Per class: oxidoreductase 62.9, transferase
+60.0, hydrolase 68.6, lyase 48.6, isomerase 17.1, ligase 54.3.
+
+**Where homology search is weak.** Proteins by their best MMseqs2 hit in Swiss-Prot (number
+correct):
+
+| Method | No hit (15) | Best hit < 30% identity (25) | Best hit ≥ 30% (170) |
+|---|---|---|---|
+| Nearest neighbour | 0 | 18 | 164 |
+| Jev + homolog evidence | 0 | 20 | 163 |
+| ESM-2 probe | **5** | 11 | 93 |
+| ESM-2 nearest neighbour | 2 | 12 | 51 |
+| Jev + motifs | 2 | 8 | 47 |
+
+Pre-registered reading:
+* ESM-2 reads function from sequence: **yes** (passes the gate).
+* ESM-2 helps where homology is weak: **no.** On the 40 hard proteins the probe gets 40.0% and
+  the nearest neighbour 45.0% (p = 0.77).
+* The hybrid (ESM-2 below 30% identity, nearest neighbour otherwise) does not beat the nearest
+  neighbour: 85.7% vs 86.7%. It hands the weak-hit proteins to ESM-2, and even hits below 30%
+  identity are right 72% of the time.
+* Post hoc (not pre-registered, not tested): using ESM-2 only for the 15 proteins without any
+  hit would give 89.0% (+2.3 points). This is the one place ESM-2 adds something, and it needs
+  a fresh benchmark to confirm.
+
+ESM-2's nearest neighbour is weak here (31%) because its training set has no homologs of the
+test proteins by construction: the closest embedding belongs to an unrelated family. The probe
+generalises across families; the nearest neighbour cannot.
+
 ## Design
 
 ```
@@ -195,6 +245,7 @@ python scripts/02_run.py --stage ec1 --model jev --context 2
 python scripts/03_evaluate.py --stage ec1
 python scripts/04_controls.py                              # logistic regression + nearest neighbour
 python scripts/06_homologs.py                              # homolog evidence for Jev (~195 calls)
+python scripts/07_esm.py                                   # ESM-2 embeddings on CPU, ~70 min
 python scripts/05_compare.py                               # ladder table, paired tests, figures
 pytest -q
 ```
@@ -237,4 +288,5 @@ compare against the committed TSVs.
 | ec1 benchmark, Jev, Laya English, Laya multilingual | done: all at chance |
 | ec1 context ladder for Jev (levels 1–2), logistic-regression controls, nearest neighbour | done: Jev reaches 27.1% with motifs, below its control (32.9%) and the gate |
 | ec1 with homolog evidence (enzyme-evidence setup) | done: Jev 87.1% (level 1) / 60.0% (level 4), tied with nearest neighbour |
+| ESM-2 650M probe and hard subset | done: 51.9% without homologs in training; helps only for proteins with no hit |
 | ec4 benchmark (11 exact ECs × 10, chance 9.1%) | built, **not run**: no model passed the ec1 gate |

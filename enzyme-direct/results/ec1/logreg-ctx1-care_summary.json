@@ -1,0 +1,64 @@
+{
+  "n": 210,
+  "n_classes": 6,
+  "correct": 64,
+  "accuracy": 30.5,
+  "accuracy_ci95": [
+    24.6,
+    37.0
+  ],
+  "chance_accuracy": 16.7,
+  "p_vs_chance_one_sided": 5.52e-07,
+  "macro_f1": 29.4,
+  "log_loss": 1.738,
+  "log_loss_uniform": 1.792,
+  "brier": 0.818,
+  "brier_uniform": 0.833,
+  "mean_top_probability": 0.382,
+  "passes_gate": false,
+  "per_class": {
+    "1": {
+      "n": 35,
+      "correct": 12,
+      "accuracy": 34.3,
+      "precision": 24.5,
+      "n_predicted": 49
+    },
+    "2": {
+      "n": 35,
+      "correct": 6,
+      "accuracy": 17.1,
+      "precision": 35.3,
+      "n_predicted": 17
+    },
+    "3": {
+      "n": 35,
+      "correct": 15,
+      "accuracy": 42.9,
+      "precision": 37.5,
+      "n_predicted": 40
+    },
+    "4": {
+      "n": 35,
+      "correct": 8,
+      "accuracy": 22.9,
+      "precision": 28.6,
+      "n_predicted": 28
+    },
+    "5": {
+      "n": 35,
+      "correct": 6,
+      "accuracy": 17.1,
+      "precision": 26.1,
+      "n_predicted": 23
+    },
+    "6": {
+      "n": 35,
+      "correct": 17,
+      "accuracy": 48.6,
+      "precision": 32.1,
+      "n_predicted": 53
+    }
+  },
+  "model": "logreg-ctx1-care"
+}

@@ -22,6 +22,9 @@ LABELS = {
     "logreg-ctx1": "LogReg on properties & composition",
     "jev-ctx2": "Jev + properties, composition & motifs",
     "logreg-ctx2": "LogReg on properties, composition & motifs",
+    "logreg-ctx1-care": "LogReg on properties & composition (3,000 CARE proteins)",
+    "esm-knn": "ESM-2 nearest neighbour (3,000 CARE proteins)",
+    "esm-probe": "ESM-2 650M probe (3,000 CARE proteins, no homologs)",
     "jev-homologs": "Jev + homolog evidence (enzyme-evidence setup)",
     "nn-care-train": "Nearest neighbour, Swiss-Prot (CARE train)",
 }

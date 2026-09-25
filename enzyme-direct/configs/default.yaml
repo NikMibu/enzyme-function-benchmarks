@@ -84,3 +84,24 @@ homologs:
 # accuracy beats the nearest neighbour from the same search (paired exact McNemar p < 0.05, Jev
 # ahead). Level 4 is reported the same way as a secondary result. A hybrid that uses Jev's
 # level-2 (motif) answer for proteins without a hit is reported as secondary as well.
+# ---------------------------------------------------------------- ESM-2 (ec1 only)
+# A protein language model as the fair sequence-only reference. Mean-pooled last-layer
+# embeddings of facebook/esm2_t33_650M_UR50D, computed on CPU.
+# Training set: CARE training proteins (benchmark removed) with one complete EC in classes 1-6,
+# 80-600 residues, and NOT among the MMseqs2 hits (e <= 1e-3, the homologs search above) of any
+# ec1 protein, so no detectable homolog of a test protein is used; seeded draw of per_class each.
+#   esm-probe          logistic regression on the embeddings (standardised, class-balanced, C=1)
+#   esm-knn            class of the nearest training protein by cosine similarity of embeddings
+#   logreg-ctx1-care   logistic regression on the level-1 features, same training set (control)
+#   hybrid-nn-esm      nearest neighbour when its best hit has >= 30% identity, else esm-probe
+# "Hard" subset: ec1 proteins with no MMseqs2 hit or a best hit below 30% identity.
+esm:
+  model: facebook/esm2_t33_650M_UR50D
+  per_class: 500
+  hard_identity: 0.3
+# Pre-registered reading (fixed before the run):
+#  - ESM-2 reads function from sequence if esm-probe passes the gate on ec1.
+#  - ESM-2 helps where homology search is weak if, on the hard subset, esm-probe beats
+#    nn-homologs (paired exact McNemar p < 0.05, esm ahead).
+#  - Secondary: hybrid-nn-esm vs nn-homologs on all 210 proteins, same test.
+#  - Any later fine-tuned Laya must beat esm-probe on ec1 to be worth reporting as useful.

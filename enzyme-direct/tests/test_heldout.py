@@ -60,3 +60,19 @@ def test_ec1_options_do_not_depend_on_the_protein():
     q = prompts.ec1_question()["ec1"]
     assert len(q["criteria"]) == 6
     assert set(prompts.LABEL_TO_EC1.values()) == set(prompts.EC1_CLASSES)
+
+
+def test_zero_shot_prompt_unchanged():
+    """The committed ec1 runs used exactly this question; context runs must not alter it."""
+    q = prompts.ec1_question()["ec1"]["instructions"]
+    assert q == ("Based only on this amino-acid sequence, which top-level Enzyme Commission (EC) "
+                 "class does this enzyme belong to?")
+
+
+def test_context_is_computed_from_sequence_only():
+    from ed import features
+    for _, r in EC1.head(20).iterrows():
+        ctx = features.render(r.Sequence, 2)
+        assert r.Entry not in ctx and r.ec not in ctx and "EC" not in ctx
+        X, names = features.matrix([r.Sequence], 2)
+        assert X.shape == (1, len(names)) and abs(X[0, names.index("aa_A"):names.index("aa_Y") + 1].sum() - 1) < 1e-9

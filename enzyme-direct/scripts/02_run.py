@@ -3,6 +3,7 @@
     python scripts/02_run.py --stage ec1 --model jev
     python scripts/02_run.py --stage ec1 --model laya-english
     python scripts/02_run.py --stage ec4 --model jev     # only if that model passed the ec1 gate
+    python scripts/02_run.py --stage ec1 --model jev --context 2   # sequence + computed context
 """
 import _common  # noqa: F401
 import argparse
@@ -10,13 +11,17 @@ import json
 
 import pandas as pd
 
-from ed import config, models, prompts
+from ed import config, features, models, prompts
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--stage", choices=["ec1", "ec4"], required=True)
 ap.add_argument("--model", choices=["jev", "laya-english", "laya-multilingual"], required=True)
 ap.add_argument("--pilot", type=int, help="plumbing check on N pool proteins outside every benchmark")
+ap.add_argument("--context", type=int, choices=[0, 1, 2], default=0,
+                help="context level appended to the sequence (ec1 and jev only)")
 args = ap.parse_args()
+if args.context and (args.stage != "ec1" or args.model != "jev"):
+    raise SystemExit("context levels are defined for --stage ec1 --model jev only")
 
 cfg = config.load()
 bench = pd.read_csv(config.BENCH / f"{args.stage}.tsv", sep="\t", dtype=str)
@@ -27,13 +32,15 @@ if args.stage == "ec4":
     labels = pd.read_csv(config.BENCH / "ec4_labels.tsv", sep="\t", dtype=str)
     qs = prompts.ec4_question(list(labels.ec), dict(zip(labels.ec, labels.name)))
 else:
-    qs = prompts.ec1_question()
-cache = config.RESULTS / args.stage / f"{args.model}_responses.jsonl"
+    qs = prompts.ec1_question(context=args.context > 0)
+run = args.model + (f"-ctx{args.context}" if args.context else "")
+cache = config.RESULTS / args.stage / f"{run}_responses.jsonl"
 if args.pilot:
     used = set(pd.concat([pd.read_csv(f, sep="\t", dtype=str) for f in config.BENCH.glob("ec*.tsv")]).Entry)
     pool = pd.read_csv(config.DATA / "raw" / "uniprot_pool.tsv", sep="\t", dtype=str)
     bench = pool[~pool.Entry.isin(used)].sample(args.pilot, random_state=0)
-    cache = config.DATA / "pilot" / f"{args.stage}_{args.model}.jsonl"
-items = [(e, prompts.state(s), qs) for e, s in zip(bench.Entry, bench.Sequence)]
+    cache = config.DATA / "pilot" / f"{args.stage}_{run}.jsonl"
+items = [(e, prompts.state(s) + features.render(s, args.context), qs)
+         for e, s in zip(bench.Entry, bench.Sequence)]
 out = models.run(args.model, cfg, items, cache)
 print(f"{len(out)} responses; example: {json.dumps(next(iter(out.values())))[:400]}")

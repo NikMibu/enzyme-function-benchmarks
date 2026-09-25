@@ -21,11 +21,13 @@ def state(seq: str) -> str:
     return f"Protein amino-acid sequence ({len(seq)} residues, one-letter code):\n{seq}"
 
 
-def ec1_question() -> dict:
+def ec1_question(context: bool = False) -> dict:
+    basis = ("Based on this amino-acid sequence and the properties computed from it" if context
+             else "Based only on this amino-acid sequence")
     return {"ec1": {
         "type": "choice",
-        "instructions": ("Based only on this amino-acid sequence, which top-level Enzyme Commission "
-                         "(EC) class does this enzyme belong to?"),
+        "instructions": (f"{basis}, which top-level Enzyme Commission (EC) class does this "
+                         "enzyme belong to?"),
         "criteria": {name: desc for name, desc in EC1_CLASSES.values()},
     }}
 

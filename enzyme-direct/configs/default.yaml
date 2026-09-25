@@ -50,3 +50,21 @@ models:
   laya-multilingual:
     router_model: multilingual
     max_len: 1024
+# ---------------------------------------------------------------- context ladder (ec1 only)
+# Jev gets the sequence plus context computed from it (src/ed/features.py):
+#   level 1: physico-chemical properties + amino-acid composition
+#   level 2: level 1 + matches to 14 fixed textbook motifs (list fixed before any context run)
+# Each level has a matched control: logistic regression on exactly the same information, trained
+# on Swiss-Prot pool proteins (same filters as the benchmarks) that share no 30%-identity family
+# with ec1 and are not in ec4. Nearest neighbour against CARE's training set (Swiss-Prot enzymes,
+# benchmark proteins removed) is the practical ceiling for sequence tools.
+context:
+  levels: [1, 2]
+controls:
+  logreg: {C: 1.0, max_iter: 5000}   # standardised features, class-balanced weights, not tuned
+  nn_reference: splits/task1/protein_train.csv
+  nn_sensitivity: 7.5
+# Pre-registered reading (fixed before any context run):
+#  - Jev "uses the context" at a level if it passes the gate above at that level.
+#  - Jev "adds to the context" if it beats that level's logistic-regression control, paired exact
+#    McNemar test p < 0.05 (two-sided) with Jev ahead.

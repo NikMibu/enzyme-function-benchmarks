@@ -1,12 +1,20 @@
-# Enzyme function from raw sequence alone (Jev, Laya)
+# Enzyme function without annotations: decision models vs protein tools
 
 A sibling of `../enzyme-evidence/`. It shares no code, data or results with it.
+**Status: concluded** (v1.0). A summary of both experiments is in [`../FINDINGS.md`](../FINDINGS.md).
 
 **Question.** Can general-purpose decision models (TypeSafe Jev, and the open-weight Laya
-checkpoints) classify an enzyme's function from its amino-acid sequence alone, with no
-retrieval, homologs, names or annotations?
+checkpoints) classify an enzyme's function from its amino-acid sequence, first alone, then with
+context computed from it, then with homolog evidence? And how do they compare with tools built
+for proteins (homology search, protein language models)?
 
-**Answer (v0.5).**
+**Conclusion.** The decision models add nothing that a simple method given the same
+information does not already achieve. On raw sequence they are at chance; with motifs they reach
+27%, below logistic regression; with homolog evidence they tie the nearest neighbour. The only
+method that beats plain homology search is a protein-language-model fallback for proteins
+without a hit (ProtT5 embedding neighbours: 64.4% vs 62.5% exact EC, p = 0.03).
+
+**Results in detail.**
 
 * **From the raw sequence: no.** On a balanced six-class EC level-1 benchmark (210 held-out
   proteins), none of the three models is above chance (16.7%). Each one collapses onto one or
@@ -307,7 +315,9 @@ python scripts/04_controls.py                              # logistic regression
 python scripts/06_homologs.py                              # homolog evidence for Jev (~195 calls)
 python scripts/07_esm.py                                   # ESM-2 embeddings on CPU, ~70 min
 python scripts/05_compare.py                               # ladder table, paired tests, figures
-python scripts/08_embedding_nn.py                          # needs UniProt's per-protein.h5 (1.4 GB) in data/raw/
+curl -o data/raw/sprot_prott5_per_protein.h5 \
+  https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/embeddings/uniprot_sprot/per-protein.h5
+python scripts/08_embedding_nn.py                          # ProtT5 neighbours, ~1 min
 pytest -q
 ```
 
@@ -351,4 +361,14 @@ compare against the committed TSVs.
 | ec1 with homolog evidence (enzyme-evidence setup) | done: Jev 87.1% (level 1) / 60.0% (level 4), tied with nearest neighbour |
 | ESM-2 650M probe and hard subset | done: 51.9% without homologs in training; helps only for proteins with no hit |
 | ProtT5 embedding neighbours, exact EC, ec1 + ec4 | done: hybrid beats MMseqs2 NN (64.4 vs 62.5%, p = 0.03) by answering proteins without a hit |
-| ec4 benchmark (11 exact ECs × 10, chance 9.1%) | built, **not run**: no model passed the ec1 gate |
+| ec4 benchmark (11 exact ECs × 10) | used with MMseqs2 and embedding neighbours only; the decision models were not run on it, since none passed the ec1 gate |
+
+## Open questions (not pursued)
+
+* **Confirm the embedding fallback on more proteins.** Its gain rests on 6 proteins out of 320;
+  a fresh benchmark rich in proteins without an MMseqs2 hit would settle it.
+* **Embedding similarity as confidence.** It is much lower without a hit (median cosine 0.72 vs
+  0.96) and could decide when to trust a fallback answer.
+* **Fine-tuning Laya** (on sequences or on homolog evidence) was considered and not done. On
+  sequences it would have to beat the ESM-2 probe (51.9%), which a text encoder is unlikely to
+  do; on homolog evidence the headroom is 1.9 points at level 1 on this benchmark.

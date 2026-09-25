@@ -1,4 +1,7 @@
-> **Research prototype:** [`enzyme-evidence/`](enzyme-evidence/) — evidence integration for enzyme EC classification on the CARE benchmark (retrieval + learned integrators, leakage-safe evaluation).
+> **Forschungsprototypen (abgeschlossen):** Enzymfunktion (EC-Nummer) vorhersagen, mit Homologie-Suche, gelernten Integratoren, Entscheidungsmodellen (Jev, Laya) und Protein-Sprachmodellen.
+> - [`enzyme-evidence/`](enzyme-evidence/): Homologie-Belege auf dem CARE-Benchmark auswerten
+> - [`enzyme-direct/`](enzyme-direct/): Funktion aus der Sequenz, mit Kontext, Homologen und Embeddings
+> - **Gesamtfazit: [`FINDINGS.md`](FINDINGS.md)**
 
 Projektidee: BioCloud – Eine KI-gestützte Bioinformatik-Plattform
 Ziel

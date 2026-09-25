@@ -1,0 +1,64 @@
+{
+  "n": 210,
+  "n_classes": 6,
+  "correct": 180,
+  "accuracy": 85.7,
+  "accuracy_ci95": [
+    80.3,
+    89.8
+  ],
+  "chance_accuracy": 16.7,
+  "p_vs_chance_one_sided": 7.41e-107,
+  "macro_f1": 85.5,
+  "log_loss": 1.414,
+  "log_loss_uniform": 1.792,
+  "brier": 0.248,
+  "brier_uniform": 0.833,
+  "mean_top_probability": 0.969,
+  "passes_gate": true,
+  "per_class": {
+    "1": {
+      "n": 35,
+      "correct": 31,
+      "accuracy": 88.6,
+      "precision": 83.8,
+      "n_predicted": 37
+    },
+    "2": {
+      "n": 35,
+      "correct": 33,
+      "accuracy": 94.3,
+      "precision": 76.7,
+      "n_predicted": 43
+    },
+    "3": {
+      "n": 35,
+      "correct": 31,
+      "accuracy": 88.6,
+      "precision": 83.8,
+      "n_predicted": 37
+    },
+    "4": {
+      "n": 35,
+      "correct": 31,
+      "accuracy": 88.6,
+      "precision": 83.8,
+      "n_predicted": 37
+    },
+    "5": {
+      "n": 35,
+      "correct": 22,
+      "accuracy": 62.9,
+      "precision": 95.7,
+      "n_predicted": 23
+    },
+    "6": {
+      "n": 35,
+      "correct": 32,
+      "accuracy": 91.4,
+      "precision": 97.0,
+      "n_predicted": 33
+    }
+  },
+  "model": "hybrid-nn-esm"
+}

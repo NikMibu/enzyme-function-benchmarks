@@ -1,0 +1,38 @@
+seed: 42
+frozen: true
+care:
+  repo: https://github.com/jsunn-y/CARE
+  commit: e570c36300bce1dd345bb726612784e518aae6b9
+  dir: data/raw/CARE
+test_splits:
+- '30'
+- 30-50
+- price
+dev:
+  max_per_ec3: 3
+  fit_pool_max: 8000
+retrieval:
+  mmseqs_release: 17-b804f
+  sensitivity: 7.5
+  max_seqs: 1000
+  evalue: 0.001
+  threads: 4
+candidates:
+  top_k_hits: 10
+  k_grid:
+  - 5
+  - 10
+  - 25
+  - 50
+  max_candidates: 10
+lgbm:
+  n_estimators: 300
+  learning_rate: 0.05
+  num_leaves: 15
+  min_child_samples: 20
+  subsample: 0.8
+  subsample_freq: 1
+  colsample_bytree: 0.8
+jev:
+  endpoint: https://api.typesafe.ai/v1/systemone
+  model: jev-1.13.0

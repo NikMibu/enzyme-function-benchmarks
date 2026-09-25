@@ -1,0 +1,324 @@
+{
+  "train_pool_without_ec1_homologs": {
+    "1": 16461,
+    "2": 48547,
+    "3": 21193,
+    "4": 14173,
+    "5": 8475,
+    "6": 10697
+  },
+  "train_n": 3000,
+  "excluded_homologs_of_ec1": 23056,
+  "esm_knn_top_cosine_quartiles": [
+    0.962,
+    0.971,
+    0.977
+  ],
+  "hard_n": 40,
+  "hard_no_hit": 15,
+  "accuracy_by_subset": {
+    "all": {
+      "esm-probe": {
+        "n": 210,
+        "accuracy": 51.9,
+        "ci95": [
+          45.2,
+          58.6
+        ]
+      },
+      "esm-knn": {
+        "n": 210,
+        "accuracy": 31.0,
+        "ci95": [
+          25.1,
+          37.5
+        ]
+      },
+      "logreg-ctx1-care": {
+        "n": 210,
+        "accuracy": 30.5,
+        "ci95": [
+          24.6,
+          37.0
+        ]
+      },
+      "nn-homologs": {
+        "n": 210,
+        "accuracy": 86.7,
+        "ci95": [
+          81.4,
+          90.6
+        ]
+      },
+      "jev-homologs": {
+        "n": 210,
+        "accuracy": 87.1,
+        "ci95": [
+          81.9,
+          91.0
+        ]
+      },
+      "jev-ctx2": {
+        "n": 210,
+        "accuracy": 27.1,
+        "ci95": [
+          21.6,
+          33.5
+        ]
+      },
+      "logreg-ctx2": {
+        "n": 210,
+        "accuracy": 32.9,
+        "ci95": [
+          26.9,
+          39.5
+        ]
+      },
+      "jev": {
+        "n": 210,
+        "accuracy": 11.9,
+        "ci95": [
+          8.2,
+          17.0
+        ]
+      },
+      "laya-english": {
+        "n": 210,
+        "accuracy": 16.2,
+        "ci95": [
+          11.8,
+          21.8
+        ]
+      },
+      "hybrid-nn-esm": {
+        "n": 210,
+        "accuracy": 85.7,
+        "ci95": [
+          80.3,
+          89.8
+        ]
+      }
+    },
+    "hard": {
+      "esm-probe": {
+        "n": 40,
+        "accuracy": 40.0,
+        "ci95": [
+          26.3,
+          55.4
+        ]
+      },
+      "esm-knn": {
+        "n": 40,
+        "accuracy": 35.0,
+        "ci95": [
+          22.1,
+          50.5
+        ]
+      },
+      "logreg-ctx1-care": {
+        "n": 40,
+        "accuracy": 22.5,
+        "ci95": [
+          12.3,
+          37.5
+        ]
+      },
+      "nn-homologs": {
+        "n": 40,
+        "accuracy": 45.0,
+        "ci95": [
+          30.7,
+          60.2
+        ]
+      },
+      "jev-homologs": {
+        "n": 40,
+        "accuracy": 50.0,
+        "ci95": [
+          35.2,
+          64.8
+        ]
+      },
+      "jev-ctx2": {
+        "n": 40,
+        "accuracy": 25.0,
+        "ci95": [
+          14.2,
+          40.2
+        ]
+      },
+      "logreg-ctx2": {
+        "n": 40,
+        "accuracy": 25.0,
+        "ci95": [
+          14.2,
+          40.2
+        ]
+      },
+      "jev": {
+        "n": 40,
+        "accuracy": 7.5,
+        "ci95": [
+          2.6,
+          19.9
+        ]
+      },
+      "laya-english": {
+        "n": 40,
+        "accuracy": 22.5,
+        "ci95": [
+          12.3,
+          37.5
+        ]
+      },
+      "hybrid-nn-esm": {
+        "n": 40,
+        "accuracy": 40.0,
+        "ci95": [
+          26.3,
+          55.4
+        ]
+      }
+    },
+    "easy": {
+      "esm-probe": {
+        "n": 170,
+        "accuracy": 54.7,
+        "ci95": [
+          47.2,
+          62.0
+        ]
+      },
+      "esm-knn": {
+        "n": 170,
+        "accuracy": 30.0,
+        "ci95": [
+          23.6,
+          37.3
+        ]
+      },
+      "logreg-ctx1-care": {
+        "n": 170,
+        "accuracy": 32.4,
+        "ci95": [
+          25.8,
+          39.7
+        ]
+      },
+      "nn-homologs": {
+        "n": 170,
+        "accuracy": 96.5,
+        "ci95": [
+          92.5,
+          98.4
+        ]
+      },
+      "jev-homologs": {
+        "n": 170,
+        "accuracy": 95.9,
+        "ci95": [
+          91.7,
+          98.0
+        ]
+      },
+      "jev-ctx2": {
+        "n": 170,
+        "accuracy": 27.6,
+        "ci95": [
+          21.5,
+          34.8
+        ]
+      },
+      "logreg-ctx2": {
+        "n": 170,
+        "accuracy": 34.7,
+        "ci95": [
+          28.0,
+          42.1
+        ]
+      },
+      "jev": {
+        "n": 170,
+        "accuracy": 12.9,
+        "ci95": [
+          8.7,
+          18.8
+        ]
+      },
+      "laya-english": {
+        "n": 170,
+        "accuracy": 14.7,
+        "ci95": [
+          10.2,
+          20.8
+        ]
+      },
+      "hybrid-nn-esm": {
+        "n": 170,
+        "accuracy": 96.5,
+        "ci95": [
+          92.5,
+          98.4
+        ]
+      }
+    }
+  },
+  "paired_tests": [
+    {
+      "a": "esm-probe",
+      "b": "nn-homologs",
+      "n": 40,
+      "acc_a": 40.0,
+      "acc_b": 45.0,
+      "a_only_correct": 5,
+      "b_only_correct": 7,
+      "mcnemar_p": 0.774
+    },
+    {
+      "a": "hybrid-nn-esm",
+      "b": "nn-homologs",
+      "n": 210,
+      "acc_a": 85.7,
+      "acc_b": 86.7,
+      "a_only_correct": 5,
+      "b_only_correct": 7,
+      "mcnemar_p": 0.774
+    },
+    {
+      "a": "esm-probe",
+      "b": "logreg-ctx1-care",
+      "n": 210,
+      "acc_a": 51.9,
+      "acc_b": 30.5,
+      "a_only_correct": 63,
+      "b_only_correct": 18,
+      "mcnemar_p": 5.2e-07
+    },
+    {
+      "a": "esm-probe",
+      "b": "jev-ctx2",
+      "n": 210,
+      "acc_a": 51.9,
+      "acc_b": 27.1,
+      "a_only_correct": 78,
+      "b_only_correct": 26,
+      "mcnemar_p": 3.28e-07
+    },
+    {
+      "a": "esm-knn",
+      "b": "nn-homologs",
+      "n": 40,
+      "acc_a": 35.0,
+      "acc_b": 45.0,
+      "a_only_correct": 2,
+      "b_only_correct": 6,
+      "mcnemar_p": 0.289
+    }
+  ],
+  "pre_registered_reading": {
+    "esm_reads_function_from_sequence": true,
+    "esm_helps_where_homology_is_weak": false,
+    "hybrid_beats_nn": false
+  }
+}

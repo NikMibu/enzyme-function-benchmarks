@@ -1,0 +1,64 @@
+{
+  "n": 210,
+  "n_classes": 6,
+  "correct": 65,
+  "accuracy": 31.0,
+  "accuracy_ci95": [
+    25.1,
+    37.5
+  ],
+  "chance_accuracy": 16.7,
+  "p_vs_chance_one_sided": 2.44e-07,
+  "macro_f1": 29.1,
+  "log_loss": 19.079,
+  "log_loss_uniform": 1.792,
+  "brier": 1.381,
+  "brier_uniform": 0.833,
+  "mean_top_probability": 1.0,
+  "passes_gate": false,
+  "per_class": {
+    "1": {
+      "n": 35,
+      "correct": 14,
+      "accuracy": 40.0,
+      "precision": 26.9,
+      "n_predicted": 52
+    },
+    "2": {
+      "n": 35,
+      "correct": 4,
+      "accuracy": 11.4,
+      "precision": 12.5,
+      "n_predicted": 32
+    },
+    "3": {
+      "n": 35,
+      "correct": 20,
+      "accuracy": 57.1,
+      "precision": 46.5,
+      "n_predicted": 43
+    },
+    "4": {
+      "n": 35,
+      "correct": 10,
+      "accuracy": 28.6,
+      "precision": 29.4,
+      "n_predicted": 34
+    },
+    "5": {
+      "n": 35,
+      "correct": 0,
+      "accuracy": 0.0,
+      "precision": 0.0,
+      "n_predicted": 16
+    },
+    "6": {
+      "n": 35,
+      "correct": 17,
+      "accuracy": 48.6,
+      "precision": 51.5,
+      "n_predicted": 33
+    }
+  },
+  "model": "esm-knn"
+}

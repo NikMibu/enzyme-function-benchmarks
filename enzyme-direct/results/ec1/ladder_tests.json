@@ -1,0 +1,76 @@
+{
+  "paired_tests": [
+    {
+      "a": "jev-ctx1",
+      "b": "logreg-ctx1",
+      "delta_accuracy": -14.8,
+      "ci95": [
+        -22.4,
+        -7.1
+      ],
+      "a_only_correct": 20,
+      "b_only_correct": 51,
+      "mcnemar_p": 0.000303
+    },
+    {
+      "a": "jev-ctx2",
+      "b": "logreg-ctx2",
+      "delta_accuracy": -5.7,
+      "ci95": [
+        -12.9,
+        1.4
+      ],
+      "a_only_correct": 27,
+      "b_only_correct": 39,
+      "mcnemar_p": 0.175
+    },
+    {
+      "a": "jev-ctx1",
+      "b": "jev",
+      "delta_accuracy": 2.4,
+      "ci95": [
+        -1.9,
+        6.7
+      ],
+      "a_only_correct": 13,
+      "b_only_correct": 8,
+      "mcnemar_p": 0.383
+    },
+    {
+      "a": "jev-ctx2",
+      "b": "jev",
+      "delta_accuracy": 15.2,
+      "ci95": [
+        10.0,
+        21.0
+      ],
+      "a_only_correct": 37,
+      "b_only_correct": 5,
+      "mcnemar_p": 4.43e-07
+    },
+    {
+      "a": "jev-ctx2",
+      "b": "jev-ctx1",
+      "delta_accuracy": 12.9,
+      "ci95": [
+        6.7,
+        19.0
+      ],
+      "a_only_correct": 37,
+      "b_only_correct": 10,
+      "mcnemar_p": 9.85e-05
+    }
+  ],
+  "pre_registered_reading": {
+    "level1": {
+      "jev_uses_context": false,
+      "jev_adds_to_context": false,
+      "control_passes_gate": false
+    },
+    "level2": {
+      "jev_uses_context": false,
+      "jev_adds_to_context": false,
+      "control_passes_gate": true
+    }
+  }
+}

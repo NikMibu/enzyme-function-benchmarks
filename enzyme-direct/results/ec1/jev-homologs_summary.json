@@ -1,0 +1,69 @@
+{
+  "n": 210,
+  "n_classes": 6,
+  "correct": 183,
+  "accuracy": 87.1,
+  "accuracy_ci95": [
+    81.9,
+    91.0
+  ],
+  "chance_accuracy": 16.7,
+  "p_vs_chance_one_sided": 2.39e-111,
+  "macro_f1": 90.1,
+  "log_loss": 1.584,
+  "log_loss_uniform": 1.792,
+  "brier": 0.17,
+  "brier_uniform": 0.833,
+  "mean_top_probability": 0.937,
+  "passes_gate": true,
+  "per_class": {
+    "1": {
+      "n": 35,
+      "correct": 31,
+      "accuracy": 88.6,
+      "precision": 93.9,
+      "n_predicted": 33
+    },
+    "2": {
+      "n": 35,
+      "correct": 32,
+      "accuracy": 91.4,
+      "precision": 91.4,
+      "n_predicted": 35
+    },
+    "3": {
+      "n": 35,
+      "correct": 30,
+      "accuracy": 85.7,
+      "precision": 85.7,
+      "n_predicted": 35
+    },
+    "4": {
+      "n": 35,
+      "correct": 31,
+      "accuracy": 88.6,
+      "precision": 96.9,
+      "n_predicted": 32
+    },
+    "5": {
+      "n": 35,
+      "correct": 24,
+      "accuracy": 68.6,
+      "precision": 100.0,
+      "n_predicted": 24
+    },
+    "6": {
+      "n": 35,
+      "correct": 35,
+      "accuracy": 100.0,
+      "precision": 97.2,
+      "n_predicted": 36
+    }
+  },
+  "model": "jev-homologs",
+  "level4_accuracy": 60.0,
+  "level4_ci95": [
+    53.3,
+    66.4
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "n": 210,
+  "n_classes": 6,
+  "correct": 69,
+  "accuracy": 32.9,
+  "accuracy_ci95": [
+    26.9,
+    39.5
+  ],
+  "chance_accuracy": 16.7,
+  "p_vs_chance_one_sided": 7.52e-09,
+  "macro_f1": 32.7,
+  "log_loss": 2.926,
+  "log_loss_uniform": 1.792,
+  "brier": 0.795,
+  "brier_uniform": 0.833,
+  "mean_top_probability": 0.476,
+  "passes_gate": true,
+  "per_class": {
+    "1": {
+      "n": 35,
+      "correct": 11,
+      "accuracy": 31.4,
+      "precision": 31.4,
+      "n_predicted": 35
+    },
+    "2": {
+      "n": 35,
+      "correct": 16,
+      "accuracy": 45.7,
+      "precision": 31.4,
+      "n_predicted": 51
+    },
+    "3": {
+      "n": 35,
+      "correct": 16,
+      "accuracy": 45.7,
+      "precision": 47.1,
+      "n_predicted": 34
+    },
+    "4": {
+      "n": 35,
+      "correct": 10,
+      "accuracy": 28.6,
+      "precision": 25.0,
+      "n_predicted": 40
+    },
+    "5": {
+      "n": 35,
+      "correct": 10,
+      "accuracy": 28.6,
+      "precision": 22.7,
+      "n_predicted": 44
+    },
+    "6": {
+      "n": 35,
+      "correct": 6,
+      "accuracy": 17.1,
+      "precision": 100.0,
+      "n_predicted": 6
+    }
+  },
+  "model": "logreg-ctx2"
+}

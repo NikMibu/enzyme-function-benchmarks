@@ -8,7 +8,7 @@ def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
     d = 1 + z * z / n
     c = (p + z * z / (2 * n)) / d
     h = z * np.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
-    return c - h, c + h
+    return float(c - h), float(c + h)
 
 
 def summarize(pred: pd.DataFrame, classes: list, gate: dict) -> dict:

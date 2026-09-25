@@ -1,0 +1,69 @@
+{
+  "n": 210,
+  "n_classes": 6,
+  "correct": 185,
+  "accuracy": 88.1,
+  "accuracy_ci95": [
+    83.0,
+    91.8
+  ],
+  "chance_accuracy": 16.7,
+  "p_vs_chance_one_sided": 1.96e-114,
+  "macro_f1": 88.0,
+  "log_loss": 1.893,
+  "log_loss_uniform": 1.792,
+  "brier": 0.201,
+  "brier_uniform": 0.833,
+  "mean_top_probability": 0.969,
+  "passes_gate": true,
+  "per_class": {
+    "1": {
+      "n": 35,
+      "correct": 32,
+      "accuracy": 91.4,
+      "precision": 86.5,
+      "n_predicted": 37
+    },
+    "2": {
+      "n": 35,
+      "correct": 32,
+      "accuracy": 91.4,
+      "precision": 86.5,
+      "n_predicted": 37
+    },
+    "3": {
+      "n": 35,
+      "correct": 31,
+      "accuracy": 88.6,
+      "precision": 75.6,
+      "n_predicted": 41
+    },
+    "4": {
+      "n": 35,
+      "correct": 31,
+      "accuracy": 88.6,
+      "precision": 96.9,
+      "n_predicted": 32
+    },
+    "5": {
+      "n": 35,
+      "correct": 24,
+      "accuracy": 68.6,
+      "precision": 100.0,
+      "n_predicted": 24
+    },
+    "6": {
+      "n": 35,
+      "correct": 35,
+      "accuracy": 100.0,
+      "precision": 89.7,
+      "n_predicted": 39
+    }
+  },
+  "model": "jev-hybrid",
+  "level4_accuracy": 60.0,
+  "level4_ci95": [
+    53.3,
+    66.4
+  ]
+}

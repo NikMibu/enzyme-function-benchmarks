@@ -6,7 +6,7 @@ A sibling of `../enzyme-evidence/`. It shares no code, data or results with it.
 checkpoints) classify an enzyme's function from its amino-acid sequence alone, with no
 retrieval, homologs, names or annotations?
 
-**Answer (v0.2).**
+**Answer (v0.3).**
 
 * **From the raw sequence: no.** On a balanced six-class EC level-1 benchmark (210 held-out
   proteins), none of the three models is above chance (16.7%). Each one collapses onto one or
@@ -20,6 +20,9 @@ retrieval, homologs, names or annotations?
   misses the pre-registered gate, and it is no better than logistic regression on the same
   information (32.9%, difference −5.7 [−12.9, +1.4]). Jev reads the motif descriptions; it
   does not add anything beyond them.
+* **Given homolog evidence (the `../enzyme-evidence` setup), Jev matches the nearest
+  neighbour again:** 87.1% vs 86.7% at EC level 1, and 60.0% vs 62.4% for the exact EC (both
+  differences not significant). The retrieval does the work; Jev adds nothing measurable.
 * No model passed the gate on sequence alone, so the harder exact-EC benchmark
   (`benchmarks/ec4.tsv`) was built but **not run**.
 
@@ -101,6 +104,44 @@ What the confusion matrices show:
   of the top hit is 56%, so most benchmark proteins have close relatives among older Swiss-Prot
   entries, even though no two benchmark proteins share a 30% family.
 
+## Homolog evidence: the enzyme-evidence setup on this benchmark
+
+The same pipeline as `../enzyme-evidence`, re-implemented here (`src/ed/homologs.py`,
+`scripts/06_homologs.py`). MMseqs2 searches each benchmark protein against CARE's training set
+(Swiss-Prot enzymes) with all benchmark proteins removed, using the same parameters (`-s 7.5`,
+e ≤ 10⁻³). The top 10 hits become one candidate per exact EC, and each candidate is shown to Jev
+with its ENZYME name, best identity, coverage, rank and support. Jev picks a candidate or "none".
+The reading was committed before the run (commit `987ac48`).
+
+| Method | EC level 1 (95% CI) | Exact EC, level 4 (95% CI) |
+|---|---|---|
+| Nearest neighbour (best hit) | 86.7 (81.4–90.6) | **62.4** (55.7–68.7) |
+| Weighted vote over the top 10 | 85.2 (79.8–89.4) | 58.1 (51.3–64.6) |
+| **Jev + homolog evidence** | **87.1** (81.9–91.0) | 60.0 (53.3–66.4) |
+| Jev + homologs, motif answer when no hit | 88.1 (83.0–91.8) | 60.0 (53.3–66.4) |
+| *Oracle: true answer among the candidates* | *88.6* | *65.7* |
+
+Paired tests against the nearest neighbour (exact McNemar, `results/ec1/homologs_report.json`):
+
+| Comparison | Level 1: Δ (only Jev / only NN right), p | Level 4: Δ (only Jev / only NN right), p |
+|---|---|---|
+| Jev + homologs vs nearest neighbour | +0.5 (2 / 1), p = 1.0 | −2.4 (1 / 6), p = 0.13 |
+| Jev + homologs vs weighted vote | +1.9 (4 / 0), p = 0.13 | +1.9 (5 / 1), p = 0.22 |
+| Hybrid vs nearest neighbour | +1.4 (4 / 1), p = 0.38 | −2.4 (1 / 6), p = 0.13 |
+
+Pre-registered reading: Jev does **not** add to the homolog evidence.
+
+* **There is little to decide.** 195 of 210 proteins have a hit, but only 97 have more than one
+  candidate. Jev picks a different exact EC from the nearest neighbour for 19 proteins (a
+  different class for 3). On those, it wins 1 and loses 6 at level 4.
+* **The ceiling is close.** At level 1 the true class is among the candidates for 88.6% of
+  proteins, and the nearest neighbour already reaches 86.7%. At level 4 the gap is 3.3 points
+  (65.7 vs 62.4), and Jev does not close it.
+* **Proteins without a hit (15)** cannot be answered from homologs. Falling back to Jev's motif
+  answer gets 2 of them right, which is where the hybrid's +1.4 points come from.
+* **Same pattern as enzyme-evidence** (Jev 69.1% vs NN 69.5% on the CARE test sets), now
+  confirmed on independent, recent Swiss-Prot proteins.
+
 ## Design
 
 ```
@@ -153,6 +194,7 @@ python scripts/02_run.py --stage ec1 --model jev --context 1   # ~210 calls each
 python scripts/02_run.py --stage ec1 --model jev --context 2
 python scripts/03_evaluate.py --stage ec1
 python scripts/04_controls.py                              # logistic regression + nearest neighbour
+python scripts/06_homologs.py                              # homolog evidence for Jev (~195 calls)
 python scripts/05_compare.py                               # ladder table, paired tests, figures
 pytest -q
 ```
@@ -194,4 +236,5 @@ compare against the committed TSVs.
 |---|---|
 | ec1 benchmark, Jev, Laya English, Laya multilingual | done: all at chance |
 | ec1 context ladder for Jev (levels 1–2), logistic-regression controls, nearest neighbour | done: Jev reaches 27.1% with motifs, below its control (32.9%) and the gate |
+| ec1 with homolog evidence (enzyme-evidence setup) | done: Jev 87.1% (level 1) / 60.0% (level 4), tied with nearest neighbour |
 | ec4 benchmark (11 exact ECs × 10, chance 9.1%) | built, **not run**: no model passed the ec1 gate |

@@ -1,0 +1,120 @@
+{
+  "n": 210,
+  "with_hit": 195,
+  "median_candidates": 1.0,
+  "median_top_identity": 0.562,
+  "unnamed_candidate_ecs": 0,
+  "oracle_level1": 88.6,
+  "oracle_level4": 65.7,
+  "accuracy": {
+    "nn-homologs": {
+      "level1": 86.7,
+      "level1_ci95": [
+        81.4,
+        90.6
+      ],
+      "level4": 62.4,
+      "level4_ci95": [
+        55.7,
+        68.7
+      ],
+      "log_loss_level1": 1.838
+    },
+    "vote-homologs": {
+      "level1": 85.2,
+      "level1_ci95": [
+        79.8,
+        89.4
+      ],
+      "level4": 58.1,
+      "level4_ci95": [
+        51.3,
+        64.6
+      ],
+      "log_loss_level1": 2.233
+    },
+    "jev-homologs": {
+      "level1": 87.1,
+      "level1_ci95": [
+        81.9,
+        91.0
+      ],
+      "level4": 60.0,
+      "level4_ci95": [
+        53.3,
+        66.4
+      ],
+      "log_loss_level1": 1.584
+    },
+    "jev-hybrid": {
+      "level1": 88.1,
+      "level1_ci95": [
+        83.0,
+        91.8
+      ],
+      "level4": 60.0,
+      "level4_ci95": [
+        53.3,
+        66.4
+      ],
+      "log_loss_level1": 1.893
+    }
+  },
+  "paired_tests": {
+    "level1": [
+      {
+        "a": "jev-homologs",
+        "b": "nn-homologs",
+        "delta": 0.5,
+        "a_only_correct": 2,
+        "b_only_correct": 1,
+        "mcnemar_p": 1.0
+      },
+      {
+        "a": "jev-homologs",
+        "b": "vote-homologs",
+        "delta": 1.9,
+        "a_only_correct": 4,
+        "b_only_correct": 0,
+        "mcnemar_p": 0.125
+      },
+      {
+        "a": "jev-hybrid",
+        "b": "nn-homologs",
+        "delta": 1.4,
+        "a_only_correct": 4,
+        "b_only_correct": 1,
+        "mcnemar_p": 0.375
+      }
+    ],
+    "level4": [
+      {
+        "a": "jev-homologs",
+        "b": "nn-homologs",
+        "delta": -2.4,
+        "a_only_correct": 1,
+        "b_only_correct": 6,
+        "mcnemar_p": 0.125
+      },
+      {
+        "a": "jev-homologs",
+        "b": "vote-homologs",
+        "delta": 1.9,
+        "a_only_correct": 5,
+        "b_only_correct": 1,
+        "mcnemar_p": 0.219
+      },
+      {
+        "a": "jev-hybrid",
+        "b": "nn-homologs",
+        "delta": -2.4,
+        "a_only_correct": 1,
+        "b_only_correct": 6,
+        "mcnemar_p": 0.125
+      }
+    ]
+  },
+  "pre_registered_reading": {
+    "jev_adds_to_homolog_evidence": false
+  }
+}

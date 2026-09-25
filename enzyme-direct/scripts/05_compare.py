@@ -22,9 +22,10 @@ LABELS = {
     "logreg-ctx1": "LogReg on properties & composition",
     "jev-ctx2": "Jev + properties, composition & motifs",
     "logreg-ctx2": "LogReg on properties, composition & motifs",
+    "jev-homologs": "Jev + homolog evidence (enzyme-evidence setup)",
     "nn-care-train": "Nearest neighbour, Swiss-Prot (CARE train)",
 }
-MODELS = {"jev", "laya-english", "laya-multilingual", "jev-ctx1", "jev-ctx2"}
+MODELS = {"jev", "laya-english", "laya-multilingual", "jev-ctx1", "jev-ctx2", "jev-homologs"}
 PAIRS = [("jev-ctx1", "logreg-ctx1"), ("jev-ctx2", "logreg-ctx2"),
          ("jev-ctx1", "jev"), ("jev-ctx2", "jev"), ("jev-ctx2", "jev-ctx1")]
 

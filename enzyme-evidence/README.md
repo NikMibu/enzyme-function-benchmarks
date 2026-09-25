@@ -108,7 +108,7 @@ To start again from scratch, set `frozen: false` in `configs/default.yaml`.
 | | Status |
 |---|---|
 | Retrieval, NN, weighted vote, oracle, LightGBM, evaluation, figures | done |
-| Jev zero-shot (`06_run_jev.py`) | implemented, **not run**: needs `TYPESAFE_API_KEY` and access to `api.typesafe.ai`. The response parsing follows the published format but is unverified. |
+| Jev zero-shot (`06_run_jev.py`) | done (jev-1.13.0, dev + one test run; response format verified against the live API). Ties NN on accuracy (pooled L4 69.1, −0.4 [−1.6, 1.0]); its confidence is worse than identity × coverage (AURC 0.269 vs 0.168 on <30%). See `results/test/jev_summary.json`. |
 | Laya fine-tuned on fit-pool contexts | phase 2 (RunPod, about 1–2 h on a 24 GB GPU per run) |
 | ESM-2 embedding neighbours as a fallback for the 7% of proteins with no hit | phase 2 |
 

@@ -1,0 +1,106 @@
+{
+  "30": {
+    "n": 432,
+    "L1": 81.9,
+    "L2": 78.0,
+    "L3": 73.8,
+    "L4": 62.3,
+    "oracle_L4": 68.8,
+    "no_hit": 14.8,
+    "n_contested": 165,
+    "contested_L4": 52.7,
+    "ECE": 0.156,
+    "Brier": 0.201,
+    "AURC_risk": 0.269,
+    "sel_acc@50%": 75.5,
+    "sel_acc@80%": 74.2,
+    "vs_nn": {
+      "delta_L4": -0.2,
+      "ci95": [
+        -2.1,
+        1.6
+      ],
+      "wins": 8,
+      "losses": 9,
+      "mcnemar_p": 1.0
+    }
+  },
+  "30-50": {
+    "n": 560,
+    "L1": 96.1,
+    "L2": 93.6,
+    "L3": 90.2,
+    "L4": 83.8,
+    "oracle_L4": 89.1,
+    "no_hit": 1.2,
+    "n_contested": 203,
+    "contested_L4": 66.0,
+    "ECE": 0.073,
+    "Brier": 0.107,
+    "AURC_risk": 0.13,
+    "sel_acc@50%": 87.9,
+    "sel_acc@80%": 90.8,
+    "vs_nn": {
+      "delta_L4": 0.2,
+      "ci95": [
+        -1.4,
+        2.0
+      ],
+      "wins": 12,
+      "losses": 11,
+      "mcnemar_p": 1.0
+    }
+  },
+  "price": {
+    "n": 148,
+    "L1": 93.9,
+    "L2": 87.8,
+    "L3": 79.7,
+    "L4": 33.8,
+    "oracle_L4": 58.1,
+    "no_hit": 4.1,
+    "n_contested": 124,
+    "contested_L4": 35.5,
+    "ECE": 0.453,
+    "Brier": 0.419,
+    "AURC_risk": 0.535,
+    "sel_acc@50%": 47.3,
+    "sel_acc@80%": 38.1,
+    "vs_nn": {
+      "delta_L4": -2.7,
+      "ci95": [
+        -7.4,
+        2.0
+      ],
+      "wins": 4,
+      "losses": 8,
+      "mcnemar_p": 0.3877
+    }
+  },
+  "pooled": {
+    "n": 1140,
+    "L1": 90.4,
+    "L2": 86.9,
+    "L3": 82.6,
+    "L4": 69.1,
+    "oracle_L4": 77.4,
+    "no_hit": 6.8,
+    "n_contested": 492,
+    "contested_L4": 53.9,
+    "ECE": 0.123,
+    "Brier": 0.183,
+    "AURC_risk": 0.221,
+    "sel_acc@50%": 79.5,
+    "sel_acc@80%": 78.8,
+    "vs_nn": {
+      "delta_L4": -0.4,
+      "ci95": [
+        -1.6,
+        1.0
+      ],
+      "wins": 24,
+      "losses": 28,
+      "mcnemar_p": 0.6778
+    }
+  }
+}
